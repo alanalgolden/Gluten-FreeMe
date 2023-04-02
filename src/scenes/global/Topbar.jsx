@@ -1,14 +1,12 @@
 import { Box, IconButton, useTheme } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ColorModeContext, tokens } from "../../theme";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SearchIcon from "@mui/icons-material/Search";
+import BugReportIcon from "@mui/icons-material/BugReport";
 import {
   LoginButton,
   LogoutButton,
@@ -17,17 +15,29 @@ import {
 } from "../../components/TopbarButtons";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import GoogleLoginButton from "../../components/GoogleLogin";
-import userDef from "../../core/utils/user";
-
-
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase";
+import { UserContext } from "../../core/Providers/UserProvider";
 
 const Topbar = () => {
   const theme = useTheme(); //grabs the theme from MUI
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  const { isLoading, error } = useAuth0();
-  const user = userDef();
+  //const { isLoading, error } = useAuth0();
+  //const [user, setUser] = useState();
+  const { user } = useContext(UserContext);
+
+  /*   useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setUser(uid);
+        console.log(`USER AUTH LOG: ${user.displayName}`);
+      } else {
+        console.log("User is logged out, or no user.");
+      }
+    });
+  }, []); */
 
   return (
     <Box
@@ -87,26 +97,27 @@ const Topbar = () => {
             />
           )}
         </IconButton>
-        <IconButton onClick={() => userDef()}>
-          <PersonOutlinedIcon/>
+        <IconButton onClick={() => ""}>
+          <PersonOutlinedIcon />
         </IconButton>
-
+        <IconButton onClick={() => console.log(user)}>
+          <BugReportIcon />
+        </IconButton>
         {/* USER AUTH */}
-        {error && <p>Authenitcation Error</p>}
-        {!error && isLoading && <p>Loading...</p>}
         {!user && (
-            <>
-              <LoginButton/>
-            </>
-        ) }
-
-        {!error && !isLoading && (
           <>
             <LoginButton />
-            <LogoutButton />  
-            <SignUpButton />
           </>
         )}
+        {user && (
+          <>
+            <LogoutButton />
+          </>
+        )}
+
+        <>
+          <SignUpButton />
+        </>
 
         {/*         <IconButton component={Link} to="/Profile">
           <PersonOutlinedIcon />

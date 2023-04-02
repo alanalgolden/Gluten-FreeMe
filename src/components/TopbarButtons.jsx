@@ -16,49 +16,44 @@ import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
 import { Link } from "react-router-dom";
 import { auth, provider } from "../firebase";
-import { signInWithPopup, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
-import { useState } from "react";
-
-
-
-const handleLogin = async () => {
-  
-signInWithPopup(auth, provider)
-
-  .then((result) => {
-    
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-    console.log(user)
-  }).catch((error) => {
-    // Handle Errors here.
-    
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-    console.log(errorMessage + "ERROR MESSAGE")
-  });
-}
+import {
+  signInWithPopup,
+  signInWithRedirect,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { useState, createContext, useContext } from "react";
+import { UserContext } from "../core/Providers/UserProvider";
 
 export const LoginButton = () => {
   const { loginWithRedirect, isAuthenticated } = useAuth0();
+  const { user, handleLogin } = useContext(UserContext);
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  //const [user, setUser] = useState();
+  /*   const handleLogin = async () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken; // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        setUser(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log(errorMessage + "ERROR MESSAGE");
+      });
+  }; */
+
   return (
-    !isAuthenticated && (
+    !user && (
       <Button
-        onClick={() => handleLogin()}
+        onClick={() => handleLogin() + console.log("User Logged in!")}
         sx={{
           mr: "10px",
           backgroundColor: "none",
@@ -73,19 +68,39 @@ export const LoginButton = () => {
 };
 
 export const LogoutButton = () => {
-  const { logout, isAuthenticated } = useAuth0();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { user, handleLogout } = useContext(UserContext);
 
   return (
-    isAuthenticated && (
+    user && (
       <Button
-        onClick={() => logout()}
+        onClick={() => handleLogout() + console.log("User Logged out!")}
         sx={{ mr: "10px", backgroundColor: colors.greenAccent[600] }}
       >
         Sign Out
       </Button>
     )
+  );
+};
+
+export const SignUpButton = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
+  return (
+    <Button
+      onClick={""}
+      sx={{
+        mr: "10px",
+        backgroundColor: colors.greenAccent[600],
+        color: colors.grey[100],
+        fontWeight: 600,
+        height: "35px",
+      }}
+    >
+      Get Started
+    </Button>
   );
 };
 
@@ -154,28 +169,5 @@ export const MakeItEasyButton = () => {
         </MenuItem>
       </Menu>
     </Box>
-  );
-};
-
-export const SignUpButton = () => {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-
-  return (
-    !isAuthenticated && (
-      <Button
-        onClick={""}
-        sx={{
-          mr: "10px",
-          backgroundColor: colors.greenAccent[600],
-          color: colors.grey[100],
-          fontWeight: 600,
-          height: "35px",
-        }}
-      >
-        Get Started
-      </Button>
-    )
   );
 };
