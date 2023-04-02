@@ -1,6 +1,13 @@
 import ClearIcon from "@mui/icons-material/Clear";
 import EditIcon from "@mui/icons-material/Edit";
-import { Box, Typography, IconButton, Input, TextField } from "@mui/material";
+import {
+  Box,
+  Typography,
+  IconButton,
+  Input,
+  TextField,
+  Divider,
+} from "@mui/material";
 import {
   getIngredients,
   listIngredientsServer,
@@ -8,12 +15,15 @@ import {
   getIngredientsServer,
   updateIngredientArray,
 } from "../core/utils/crud";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { getDocFromCache } from "firebase/firestore";
 import AddIcon from "@mui/icons-material/Add";
+import { UserContext } from "../core/Providers/UserProvider";
 
-export const Ingredients = () => {
-  const idd = "mjf9t1WfXlfOfM3d6kAb";
+export const Stock = () => {
+  const { user } = useContext(UserContext);
+  const idd = user.uid;
+  const ingredientType = "stock";
   const [input, setInput] = useState("");
   const [ingredientInput, setIngredientInput] = useState("");
   const [ingredients, setIngredient] = useState([]);
@@ -21,10 +31,12 @@ export const Ingredients = () => {
 
   useEffect(() => {
     const getIngredientsList = async () => {
-      const data = await getIngredients(idd).then((ingredient) => {
-        setIngredient(ingredient);
-        console.log(ingredient);
-      });
+      const data = await getIngredients(idd, ingredientType).then(
+        (ingredient) => {
+          setIngredient(ingredient);
+          console.log(ingredient);
+        }
+      );
     };
 
     getIngredientsList();
@@ -34,18 +46,19 @@ export const Ingredients = () => {
     console.log(ingredients)
   ) : (
     <Box>
+      <Typography variant="h4" sx={{ mb: "10px" }}>
+        Stock
+      </Typography>
+      <Divider sx={{ mb: "10px" }} />
       <Box display="flex" alignContent="center">
         <IconButton
           type="submit"
-          onClick={
-            () => {
-              updateIngredientArray("mjf9t1WfXlfOfM3d6kAb", ingredientInput);
-              setDataStatus(`Added Doc ${ingredientInput}`);
-              setIngredientInput("");
-              console.log("okay so it's not going down");
-            }
-            //TODO : remove mjf9t1WfXlfOfM3d6kAb token, use function to bind to user
-          }
+          onClick={() => {
+            updateIngredientArray(idd, ingredientInput, ingredientType);
+            setDataStatus(`Added Doc ${ingredientInput}`);
+            setIngredientInput("");
+            console.log("okay so it's not going down");
+          }}
         >
           <AddIcon />
         </IconButton>
@@ -57,7 +70,7 @@ export const Ingredients = () => {
           onChange={(event) => setIngredientInput(event.target.value)}
           onKeyDown={(ev) => {
             if (ev.key === "Enter") {
-              updateIngredientArray("mjf9t1WfXlfOfM3d6kAb", ingredientInput);
+              updateIngredientArray(idd, ingredientInput, ingredientType);
               setDataStatus(`Added Doc ${ingredientInput}`);
               setIngredientInput("");
               console.log("If you see this then wtf");
@@ -73,16 +86,14 @@ export const Ingredients = () => {
             <Box display="flex" alignContent="center" alignItems="center">
               <IconButton
                 onClick={() =>
-                  deleteArrayFromDoc(idd, ingredients) +
+                  deleteArrayFromDoc(idd, ingredients, ingredientType) +
                   setDataStatus(`Deleted Doc ${ingredients}`) +
                   console.log("Deleted Doc")
                 }
               >
                 <ClearIcon />
               </IconButton>
-              <IconButton
-                onClick={() => listIngredientsServer("mjf9t1WfXlfOfM3d6kAb")}
-              >
+              <IconButton onClick={() => listIngredientsServer(idd)}>
                 <EditIcon />
               </IconButton>
               <Typography></Typography>
@@ -95,4 +106,4 @@ export const Ingredients = () => {
   );
 };
 
-export default Ingredients;
+export default Stock;

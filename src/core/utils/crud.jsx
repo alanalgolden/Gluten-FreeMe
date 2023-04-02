@@ -17,8 +17,11 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
-const cacheData = collection(db, "Ingredients");
-const serverData = collection(db, "Ingredients");
+const cacheData = collection(db, "Users");
+const serverData = collection(db, "Users");
+const dbName = "Users";
+const spices = "spices";
+const stock = "stock";
 
 //Currently unused in favorte of updateIngredint array
 export const addIngredient = async (props) => {
@@ -26,45 +29,69 @@ export const addIngredient = async (props) => {
 };
 
 export const updateIngredient = async (id, props) => {
-  const ingredientDoc = doc(db, "Ingredients", id);
+  const ingredientDoc = doc(db, dbName, id);
   await updateDoc(ingredientDoc, `${props}`);
 };
 
-export const updateIngredientArray = async (id, props) => {
-  const docRef = doc(db, "Ingredients", id);
-  await updateDoc(docRef, {
-    //TODO : remove alanaIngredients Placeholder
-    alanaIngredients: arrayUnion(props),
-  });
+//Updated for spice/stock
+export const updateIngredientArray = async (id, props, ingredientType) => {
+  const docRef = doc(db, dbName, id);
+  if (ingredientType === spices) {
+    await updateDoc(docRef, {
+      spices: arrayUnion(props),
+    });
+  } else if (ingredientType === stock) {
+    await updateDoc(docRef, {
+      stock: arrayUnion(props),
+    });
+  }
 };
 
 export const deleteIngredient = async (id) => {
-  const ingredientDoc = doc(db, "Ingredients", id);
+  const ingredientDoc = doc(db, dbName, id);
   await deleteDoc(ingredientDoc);
 };
 
-export const getIngredients = async (id) => {
-  const docRef = doc(db, "Ingredients", id);
+export const getIngredients = async (id, ingredientType) => {
+  const docRef = doc(db, dbName, id);
 
-  try {
-    const doc = await getDocFromCache(docRef);
-    const alanaIngredients = doc.data().alanaIngredients;
-    console.log("Got ingredients from cache");
+  if (ingredientType === spices) {
+    try {
+      const doc = await getDocFromCache(docRef);
+      const spices = doc.data().spices;
+      console.log("Got ingredients from cache");
 
-    return alanaIngredients;
-  } catch (e) {
-    console.log("Error getting cached document", e);
+      return spices;
+    } catch (e) {
+      console.log("Error getting cached document", e);
 
-    const doc = await getDocFromServer(docRef);
-    const alanaIngredients = doc.data().alanaIngredients;
-    console.log("Got data from server");
+      const doc = await getDocFromServer(docRef);
+      const spices = doc.data().spices;
+      console.log("Got data from server");
 
-    return alanaIngredients;
+      return spices;
+    }
+  } else if (ingredientType === stock) {
+    try {
+      const doc = await getDocFromCache(docRef);
+      const stock = doc.data().stock;
+      console.log("Got ingredients from cache");
+
+      return stock;
+    } catch (e) {
+      console.log("Error getting cached document", e);
+
+      const doc = await getDocFromServer(docRef);
+      const stock = doc.data().stock;
+      console.log("Got data from server");
+
+      return stock;
+    }
   }
 };
 
 export const listIngredientsCache = async (id) => {
-  const docRef = doc(db, "Ingredients", id);
+  const docRef = doc(db, dbName, id);
 
   try {
     const doc = await getDocFromCache(docRef);
@@ -75,7 +102,7 @@ export const listIngredientsCache = async (id) => {
 };
 
 export const listIngredientsServer = async (id) => {
-  const docRef = doc(db, "Ingredients", id);
+  const docRef = doc(db, dbName, id);
 
   try {
     const doc = await getDocFromServer(docRef);
@@ -85,13 +112,20 @@ export const listIngredientsServer = async (id) => {
   }
 };
 
-export const deleteArrayFromDoc = async (id, ingredient) => {
-  const docRef = doc(db, "Ingredients", id);
+export const deleteArrayFromDoc = async (id, ingredient, ingredientType) => {
+  const docRef = doc(db, dbName, id);
 
-  await updateDoc(docRef, {
-    alanaIngredients: arrayRemove(ingredient),
-    lastModified: Timestamp.now(),
-  });
+  if (ingredientType === spices) {
+    await updateDoc(docRef, {
+      spices: arrayRemove(ingredient),
+      lastModified: Timestamp.now(),
+    });
+  } else if (ingredientType === stock) {
+    await updateDoc(docRef, {
+      stock: arrayRemove(ingredient),
+      lastModified: Timestamp.now(),
+    });
+  }
 };
 
 export const checkAndCreateUserDoc = async (uid, spices, stock) => {
