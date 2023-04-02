@@ -18,6 +18,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
 import { UserContext } from "../../core/Providers/UserProvider";
+import AccountMenu from "../../components/AccountMenu";
 
 const Topbar = () => {
   const theme = useTheme(); //grabs the theme from MUI
@@ -82,7 +83,7 @@ const Topbar = () => {
           </IconButton>
         </Box>
       </Box>
-      <Box>
+      <Box display="flex">
         {/* ICONS */}
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
@@ -107,21 +108,10 @@ const Topbar = () => {
         {!user && (
           <>
             <LoginButton />
+            <SignUpButton />
           </>
         )}
-        {user && (
-          <>
-            <LogoutButton />
-          </>
-        )}
-
-        <>
-          <SignUpButton />
-        </>
-
-        {/*         <IconButton component={Link} to="/Profile">
-          <PersonOutlinedIcon />
-        </IconButton> */}
+        {user && <AccountMenu />}
       </Box>
     </Box>
   );

@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext } from "react";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { auth, provider } from "../../firebase";
+import { checkAndCreateUserDoc } from "../utils/crud";
 
 export const UserContext = createContext(null);
 
@@ -23,7 +24,11 @@ export const UserProvider = ({ children }) => {
         localStorage.setItem("user", JSON.stringify(user));
         setUser(user);
         console.log(user);
-        setUser(user);
+        checkAndCreateUserDoc(
+          user.uid,
+          ["add spices here!"],
+          ["add ingredients here!"]
+        );
       })
       .catch((e) => {
         const errorCode = e.code;

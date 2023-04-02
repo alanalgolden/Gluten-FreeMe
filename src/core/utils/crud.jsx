@@ -11,6 +11,9 @@ import {
   FieldValue,
   arrayRemove,
   Timestamp,
+  setDoc,
+  serverTimestamp,
+  getDoc,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
@@ -89,4 +92,24 @@ export const deleteArrayFromDoc = async (id, ingredient) => {
     alanaIngredients: arrayRemove(ingredient),
     lastModified: Timestamp.now(),
   });
+};
+
+export const checkAndCreateUserDoc = async (uid, spices, stock) => {
+  const docRef = doc(db, "Users", uid);
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    try {
+      await setDoc(docRef, {
+        spices: spices,
+        stock: stock,
+        lastModified: serverTimestamp(),
+      });
+      console.log(`Document created with ID: ${uid}`);
+    } catch (e) {
+      console.error(`Error creating document: ${e}`);
+    }
+  } else {
+    console.log(`Document already exists with ID: ${uid}`);
+  }
 };
