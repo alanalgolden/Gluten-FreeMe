@@ -50,7 +50,7 @@ const Topbar = () => {
       }}
     >
       <Box>
-        <Link to="/Dashboard">
+        <Link to="/Home">
           <img
             src={
               theme.palette.mode === "dark"

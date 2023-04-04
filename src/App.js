@@ -6,6 +6,8 @@ import Dashboard from "./scenes/dashboard";
 import Profile from "./components/Profile";
 import SideBar from "./scenes/global/Sidebar";
 import Aitest from "./scenes/aitest";
+import Subscriptions from "./scenes/subscriptions";
+import Home from "./scenes/home";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -21,6 +23,8 @@ function App() {
               <Route path="/" element={<Dashboard />} />
               <Route path="/Profile" element={<Profile />} />
               <Route path="/aitest" element={<Aitest />} />
+              <Route path="/subscriptions" element={<Subscriptions />} />
+              <Route path="/home" element={<Home />} />
             </Routes>
           </main>
         </div>

@@ -1,7 +1,6 @@
-import { initializeApp, } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { enableIndexedDbPersistence, getFirestore } from "@firebase/firestore";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -18,7 +17,9 @@ const app = initializeApp(firebaseConfig);
 export const provider = new GoogleAuthProvider();
 export const auth = getAuth();
 
+provider.setCustomParameters({
+  prompt: "select_account",
+});
 
 export const db = getFirestore(app);
 enableIndexedDbPersistence(db);
-

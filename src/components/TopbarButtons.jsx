@@ -128,7 +128,7 @@ export const MakeItEasyButton = () => {
           fontSize: "18px",
         }}
       >
-        Make Eating Easy
+        Let's get cooking!
         <KeyboardArrowDownIcon />
       </Button>
 

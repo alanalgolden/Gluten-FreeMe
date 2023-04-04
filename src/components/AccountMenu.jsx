@@ -14,9 +14,11 @@ import {
 } from "@mui/material";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
+import StarsIcon from "@mui/icons-material/Stars";
 import Logout from "@mui/icons-material/Logout";
 import { UserContext } from "../core/Providers/UserProvider";
 import { tokens } from "../theme";
+import { Link } from "react-router-dom";
 
 const AccountMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -97,6 +99,12 @@ const AccountMenu = () => {
           </Box>
         </MenuItem>
         <Divider />
+        <MenuItem component={Link} to="/subscriptions" onClick={handleClose}>
+          <ListItemIcon>
+            <StarsIcon fontSize="small" />
+          </ListItemIcon>
+          Subscribe
+        </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
