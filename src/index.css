@@ -33,3 +33,20 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.allergen-button {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.allergen-button:active {
+  background-color: green;
+  color: white;
+}
+
+.allergen-button:inactive {
+  background-color: lightgray;
+  color: black;
+}
