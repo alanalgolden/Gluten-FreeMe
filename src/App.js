@@ -8,6 +8,7 @@ import SideBar from "./scenes/global/Sidebar";
 import Aitest from "./scenes/aitest";
 import Subscriptions from "./scenes/subscriptions";
 import Home from "./scenes/home";
+import MealPLan from "./scenes/mealplan";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -25,6 +26,7 @@ function App() {
               <Route path="/aitest" element={<Aitest />} />
               <Route path="/subscriptions" element={<Subscriptions />} />
               <Route path="/home" element={<Home />} />
+              <Route path="/mealplan" element={<MealPLan />} />
             </Routes>
           </main>
         </div>

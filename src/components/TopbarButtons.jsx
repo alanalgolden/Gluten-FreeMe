@@ -149,7 +149,7 @@ export const MakeItEasyButton = () => {
           horizontal: "right",
         }}
       >
-        <MenuItem component={Link} to="/aitest" onClick={handleClose}>
+        <MenuItem component={Link} to="/mealplan" onClick={handleClose}>
           <ListItemIcon>
             <MenuBookIcon />
           </ListItemIcon>
@@ -161,7 +161,7 @@ export const MakeItEasyButton = () => {
           </ListItemIcon>
           <ListItemText>Grocery List</ListItemText>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem component={Link} to="/aitest" onClick={handleClose}>
           <ListItemIcon>
             <RestaurantIcon />
           </ListItemIcon>
