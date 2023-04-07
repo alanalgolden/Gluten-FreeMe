@@ -7,6 +7,7 @@ import {
   AccordionSummary,
   Divider,
   IconButton,
+  Button,
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { tokens } from "../../theme";
@@ -16,7 +17,12 @@ import Item from "@mui/material/Unstable_Grid2";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-
+import ShoppingBasketIcon from "@mui/icons-material/ShoppingBasket";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import RefreshIcon from "@mui/icons-material/Refresh";
+import AddIcon from "@mui/icons-material/Add";
+import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
+import CheckBoxOutlineBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlineBlankOutlined";
 const MealPLan = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -362,17 +368,28 @@ const MealPLan = () => {
                     borderRadius: "0 0 10px 10px",
                   }}
                 >
-                  <Box sx={{ ml: "10px" }}>
-                    <Typography
-                      variant="h6"
-                      sx={{ color: colors.greenAccent[400] }}
-                    >
-                      Wednesday, 4/12
-                    </Typography>
-                    <Typography sx={{ ml: "10px" }}>
-                      • Take 2LBs of Ground Beef out of the Freezer in the
-                      morning.
-                    </Typography>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Box sx={{ width: "75%", ml: "10px" }}>
+                      <Typography
+                        variant="h6"
+                        sx={{ color: colors.greenAccent[400], fontWeight: 600 }}
+                      >
+                        Wednesday, 4/12
+                      </Typography>
+                      <Typography>
+                        • Take 2LBs of Ground Beef out of the Freezer in the
+                        morning.
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <IconButton>
+                        <EventAvailableOutlinedIcon />
+                      </IconButton>
+                    </Box>
                   </Box>
                 </Item>
               </Box>
@@ -380,8 +397,6 @@ const MealPLan = () => {
           </Grid>
           <Grid md={9}>
             <Box
-              display="flex"
-              alignItems="center"
               width="800px"
               height="100px"
               sx={{
@@ -391,9 +406,28 @@ const MealPLan = () => {
               }}
             >
               <Item>
-                <Typography variant="h2" sx={{ ml: "10px" }}>
-                  Recipe Name
-                </Typography>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  sx={{ mt: "20px" }}
+                >
+                  <Typography variant="h2" sx={{ ml: "10px" }}>
+                    Recipe Name
+                  </Typography>
+                  <Box sx={{ mr: "10px" }}>
+                    <IconButton>
+                      <AddIcon sx={{ fontSize: "28px" }} />
+                    </IconButton>
+                    <IconButton>
+                      <RefreshIcon sx={{ fontSize: "28px" }} />
+                    </IconButton>
+
+                    <IconButton>
+                      <FavoriteBorderIcon sx={{ fontSize: "28px" }} />
+                    </IconButton>
+                  </Box>
+                </Box>
               </Item>
             </Box>
             <Box
@@ -409,6 +443,32 @@ const MealPLan = () => {
                   <Grid md={9}>
                     <Typography variant="h3">Preperation</Typography>
                     <Divider sx={{ mt: "10px" }} />
+                    <Box sx={{ m: "20px 0 20px 0" }}>
+                      <Typography fontSize="18px">
+                        1. This is an example step for the recipes. <br />
+                        1. This is an example step for the recipes. <br /> 1.
+                        This is an example step for the recipes. <br /> 1. This
+                        is an example step for the recipes. <br /> 1. This is an
+                        example step for the recipes. <br />
+                        1. This is an example step for the recipes. <br />
+                        1. This is an example step for the recipes. <br /> 1.
+                        This is an example step for the recipes.
+                      </Typography>
+                    </Box>
+                    <Typography variant="h3">Recipe Instructions</Typography>
+                    <Divider sx={{ mt: "10px" }} />
+                    <Box sx={{ m: "20px 0 20px 0" }}>
+                      <Typography fontSize="18px">
+                        1. This is an example step for the recipes. <br />
+                        1. This is an example step for the recipes. <br /> 1.
+                        This is an example step for the recipes. <br /> 1. This
+                        is an example step for the recipes. <br /> 1. This is an
+                        example step for the recipes. <br />
+                        1. This is an example step for the recipes. <br />
+                        1. This is an example step for the recipes. <br /> 1.
+                        This is an example step for the recipes.
+                      </Typography>
+                    </Box>
                   </Grid>
                   <Grid md={3}>
                     <Box
@@ -425,13 +485,52 @@ const MealPLan = () => {
                     </Box>
                     <Box sx={{ backgroundColor: colors.primary[800] }}>
                       <Item>
-                        • Carrots <br />• Potatoes <br />• Chicken <br />•
-                        Chicken Base
+                        <Box display="flex" alignItems="center">
+                          <IconButton>
+                            <CheckBoxOutlineBlankOutlinedIcon
+                              sx={{ fontSize: "12px !important" }}
+                            />
+                          </IconButton>
+                          <Typography sx={{ ml: "2px" }}>
+                            Carrots <br />
+                          </Typography>
+                        </Box>
+                        <Box display="flex" alignItems="center">
+                          <IconButton>
+                            <CheckBoxOutlineBlankOutlinedIcon
+                              sx={{ fontSize: "12px !important" }}
+                            />
+                          </IconButton>
+                          <Typography sx={{ ml: "2px" }}>
+                            Potatoes <br />
+                          </Typography>
+                        </Box>
+                        <Box display="flex" alignItems="center">
+                          <IconButton>
+                            <CheckBoxOutlineBlankOutlinedIcon
+                              sx={{ fontSize: "12px !important" }}
+                            />
+                          </IconButton>
+                          <Typography sx={{ ml: "2px" }}>
+                            Chicken <br />
+                          </Typography>
+                        </Box>
+                        <Box display="flex" alignItems="center">
+                          <IconButton>
+                            <CheckBoxOutlineBlankOutlinedIcon
+                              sx={{ fontSize: "12px !important" }}
+                            />
+                          </IconButton>
+                          <Typography sx={{ ml: "2px" }}>
+                            Celery <br />
+                          </Typography>
+                        </Box>
                       </Item>
                     </Box>
                     <Box
                       sx={{
                         backgroundColor: colors.primary[700],
+                        borderRadius: "0 0 20px 20px",
                       }}
                     >
                       <Item textAlign="center">
@@ -439,15 +538,176 @@ const MealPLan = () => {
                           Spices
                         </Typography>
                       </Item>
-                      <Box sx={{ backgroundColor: colors.primary[800] }}>
+                      <Box
+                        sx={{
+                          backgroundColor: colors.primary[800],
+                          borderRadius: "0 0 20px 20px",
+                        }}
+                      >
                         <Item>
-                          • Salt <br />• Pepper <br />• Garlic Powder
-                          <br />• Onion Powder
+                          <Box display="flex" alignItems="center">
+                            <IconButton>
+                              <CheckBoxOutlineBlankOutlinedIcon
+                                sx={{ fontSize: "12px !important" }}
+                              />
+                            </IconButton>
+                            <Typography sx={{ ml: "2px" }}>
+                              Salt <br />
+                            </Typography>
+                          </Box>
+                          <Box display="flex" alignItems="center">
+                            <IconButton>
+                              <CheckBoxOutlineBlankOutlinedIcon
+                                sx={{ fontSize: "12px !important" }}
+                              />
+                            </IconButton>
+                            <Typography sx={{ ml: "2px" }}>
+                              Pepper <br />
+                            </Typography>
+                          </Box>
+                          <Box display="flex" alignItems="center">
+                            <IconButton>
+                              <CheckBoxOutlineBlankOutlinedIcon
+                                sx={{ fontSize: "12px !important" }}
+                              />
+                            </IconButton>
+                            <Typography sx={{ ml: "2px" }}>
+                              Onion Powder <br />
+                            </Typography>
+                          </Box>
+                          <Box display="flex" alignItems="center">
+                            <IconButton>
+                              <CheckBoxOutlineBlankOutlinedIcon
+                                sx={{ fontSize: "12px !important" }}
+                              />
+                            </IconButton>
+                            <Typography sx={{ ml: "2px" }}>
+                              Garlic Powder <br />
+                            </Typography>
+                          </Box>
                         </Item>
                       </Box>
                     </Box>
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      sx={{ mt: "25px" }}
+                    >
+                      <Item>
+                        <Button
+                          sx={{
+                            backgroundColor: colors.greenAccent[700],
+                            color: "white",
+                            borderRadius: "20px",
+                            p: "6px 25px 6px 25px",
+                            textAlign: "center",
+
+                            fontWeight: 600,
+                          }}
+                        >
+                          Add Side Dish +
+                        </Button>
+                      </Item>
+                    </Box>
+                    <Box
+                      display="flex"
+                      justifyContent="center"
+                      sx={{ mt: "10px" }}
+                    >
+                      <Item>
+                        <Button
+                          sx={{
+                            backgroundColor: colors.greenAccent[700],
+                            color: "white",
+                            borderRadius: "20px",
+                            p: "6px 25px 6px 25px",
+                            textAlign: "center",
+
+                            fontWeight: 600,
+                          }}
+                        >
+                          Video Guide
+                        </Button>
+                      </Item>
+                    </Box>
                   </Grid>
                 </Grid>
+              </Item>
+            </Box>
+            <Box
+              sx={{
+                backgroundColor: colors.primary[500],
+                mt: "25px",
+                borderRadius: "10px 10px 0 0",
+              }}
+            >
+              <Item>
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  sx={{
+                    backgroundColor: colors.primary[500],
+                    ml: "10px",
+                    mt: "10px",
+                  }}
+                >
+                  <Typography variant="h3">Grocery List</Typography>
+                  <Box display="flex" alignItems="center">
+                    <Button
+                      sx={{
+                        backgroundColor: colors.greenAccent[700],
+                        color: "white",
+                        borderRadius: "20px",
+                        p: "6px 25px 6px 25px",
+                        textAlign: "center",
+                        mr: "10px",
+                        fontWeight: 600,
+                      }}
+                    >
+                      Order on Amazon Fresh
+                    </Button>
+                    <ShoppingBasketIcon sx={{ mr: "10px", fontSize: "28px" }} />
+                  </Box>
+                </Box>
+                <Divider sx={{ mt: "10px", mb: "10px" }} />
+                <Box
+                  sx={{
+                    backgroundColor: colors.primary[600],
+                    mt: "20px",
+                    mb: "20px",
+                    borderRadius: "10px",
+                  }}
+                >
+                  <Grid container columns={{ md: 12 }} spacing={2}>
+                    <Grid md={4}>
+                      <Box sx={{ ml: "10px" }}>
+                        <Typography>
+                          • Ingredient <br />
+                          • Ingredient <br />
+                          • Ingredient <br />
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid md={4}>
+                      <Box sx={{ ml: "10px" }}>
+                        <Typography>
+                          • Ingredient <br />
+                          • Ingredient <br />
+                          • Ingredient <br />
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid md={4}>
+                      <Box sx={{ ml: "10px" }}>
+                        <Typography>
+                          • Ingredient <br />
+                          • Ingredient <br />
+                          • Ingredient <br />
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Box>
               </Item>
             </Box>
           </Grid>
