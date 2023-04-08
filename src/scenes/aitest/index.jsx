@@ -7,7 +7,7 @@ import { getDoc, collection, getDocs, doc } from "firebase/firestore";
 import RefreshIcon from "@mui/icons-material/Refresh";
 
 import { getIngredients } from "../../core/utils/crud";
-import FetchData from "../../core/utils/completions";
+import { FetchData } from "../../core/utils/completions";
 import Spices from "../../components/Spices";
 import { UserContext } from "../../core/Providers/UserProvider";
 import Stock from "../../components/Stock";

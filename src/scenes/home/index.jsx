@@ -28,6 +28,7 @@ import {
   SoyaIcon,
 } from "react-allergens";
 import { useState } from "react";
+import { mealPlanInit } from "../../components/MealPlan/MakeMealPlan";
 
 const Home = () => {
   const theme = useTheme(); //grabs the theme from MUI
@@ -755,6 +756,7 @@ const Home = () => {
                   Ready to get cooking?
                 </Typography>
                 <Button
+                  onClick={mealPlanInit}
                   sx={{
                     backgroundColor: colors.greenAccent[700],
                     color: "white",

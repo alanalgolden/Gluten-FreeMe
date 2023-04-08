@@ -1,14 +1,14 @@
 import axios from "axios";
 
-const FetchData = async (props, prompt) => {
+export const FetchData = async (props) => {
   const apiKey = process.env.REACT_APP_OPEN_AI_API_KEY;
 
   const response = await axios.post(
     "https://api.openai.com/v1/completions",
     {
-      prompt: `${prompt} "${props}"`,
-      model: "text-davinci-003",
-      max_tokens: 1000,
+      prompt: `${props}`,
+      model: "gpt-3.5-turbo",
+      max_tokens: 4000,
       n: 1,
       //stop: ".",
     },
@@ -19,8 +19,26 @@ const FetchData = async (props, prompt) => {
       },
     }
   );
-  
+
   return response.data.choices[0].text;
 };
 
-export default FetchData;
+export const FetchDataChat = async (props) => {
+  const apiKey = process.env.REACT_APP_OPEN_AI_API_KEY;
+
+  const response = await axios.post(
+    "https://api.openai.com/v1/chat/completions",
+    {
+      model: "gpt-3.5-turbo",
+      messages: [{ role: "user", content: props }],
+    },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+    }
+  );
+
+  return response;
+};

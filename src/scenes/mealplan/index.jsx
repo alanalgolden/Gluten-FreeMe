@@ -441,7 +441,7 @@ const MealPLan = () => {
               <Item>
                 <Grid container columns={{ md: 12 }} spacing={2}>
                   <Grid md={9}>
-                    <Typography variant="h3">Preperation</Typography>
+                    <Typography variant="h3">Preparation</Typography>
                     <Divider sx={{ mt: "10px" }} />
                     <Box sx={{ m: "20px 0 20px 0" }}>
                       <Typography fontSize="18px">

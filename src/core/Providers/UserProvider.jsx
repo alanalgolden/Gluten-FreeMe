@@ -4,6 +4,7 @@ import { auth, provider } from "../../firebase";
 import { checkAndCreateUserDoc } from "../utils/crud";
 
 export const UserContext = createContext(null);
+export const user = UserContext.uid;
 
 export const UserProvider = ({ children }) => {
   const loadUserFromLocalStorage = () => {
