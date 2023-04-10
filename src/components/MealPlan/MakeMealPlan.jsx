@@ -1,11 +1,8 @@
-import { useState } from "react";
 import { FetchDataChat } from "../../core/utils/completions";
-import { checkCache, checkServer } from "./MealPlanCrud";
+import { checkCache, checkServer, createMealPlanDoc } from "./MealPlanCrud";
 import { user } from "../../core/Providers/UserProvider";
 
-const uid = user;
-
-export async function mealPlanInit() {
+export async function mealPlanInit(user) {
   let mealPlanHigh = "";
   const BLANK = "BLANK";
 
@@ -220,16 +217,20 @@ export async function mealPlanInit() {
           }
         }"
     `);
+
     let mealPlanHigh = JSON.parse(mealPlan.data.choices[0].message.content);
     const splitVar = mealPlan.data.choices[0].message.content;
     console.log(mealPlanHigh.Monday.breakfast.name);
-    console.log(mealPlanHigh);
-    console.log(splitVar);
+    //console.log(mealPlanHigh);
+    //console.log(splitVar);
 
     //need to add data to put into each of the array locations
+    createMealPlanDoc(user, mealPlanHigh.Monday);
   } catch (error) {
     console.error(error);
   }
 
-  checkServer(uid, mealPlanHigh);
+  //NOTE: These are both returning blank which means that user is not properly being passed and mealPlanHigh let is not working
+  console.log(mealPlanHigh);
+  console.log(user);
 }

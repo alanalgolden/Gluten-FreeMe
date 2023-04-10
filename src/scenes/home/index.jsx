@@ -28,12 +28,12 @@ import {
   SoyaIcon,
 } from "react-allergens";
 import { useState } from "react";
-import { mealPlanInit } from "../../components/MealPlan/MakeMealPlan";
+import { mealPlanInit } from "../../components/MealPlan/MakeMealPlanLite";
 
 const Home = () => {
   const theme = useTheme(); //grabs the theme from MUI
   const colors = tokens(theme.palette.mode);
-  const { user } = useContext(UserContext);
+  const { user, handleLogin } = useContext(UserContext);
 
   const [allergens, setAllergens] = useState([]);
   const [mealPrepDays, setMealPrepDays] = useState([]);
@@ -756,7 +756,9 @@ const Home = () => {
                   Ready to get cooking?
                 </Typography>
                 <Button
-                  onClick={mealPlanInit}
+                  onClick={() => {
+                    !user ? handleLogin() : mealPlanInit(user.uid);
+                  }}
                   sx={{
                     backgroundColor: colors.greenAccent[700],
                     color: "white",

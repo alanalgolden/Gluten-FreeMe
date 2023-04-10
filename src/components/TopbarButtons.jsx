@@ -25,7 +25,6 @@ import { useState, createContext, useContext } from "react";
 import { UserContext } from "../core/Providers/UserProvider";
 
 export const LoginButton = () => {
-  const { loginWithRedirect, isAuthenticated } = useAuth0();
   const { user, handleLogin } = useContext(UserContext);
 
   const theme = useTheme();
