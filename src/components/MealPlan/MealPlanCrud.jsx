@@ -15,11 +15,11 @@ export const checkCache = async (uid, apiCall) => {
   try {
     const doc = await getDocFromCache(docRef);
     const userMealPlan = doc.data();
+
     console.log(`Got ${userMealPlan} from !CACHE!`);
 
     if (userMealPlan === undefined) {
       console.log(`${uid} is undefined!`);
-      checkServer(uid, apiCall);
     } else if (userMealPlan !== undefined) {
       //replaceDoc(uid, apiCall);
       console.log(`Got ${uid} from !cache!`);
@@ -28,10 +28,6 @@ export const checkCache = async (uid, apiCall) => {
     return userMealPlan;
   } catch (e) {
     console.log(e);
-    console.log(
-      `No mealPlan doc for UID ${uid} on !CACHE!. Checking server...`
-    );
-    checkServer(uid, apiCall);
   }
 };
 
@@ -45,7 +41,6 @@ export const checkServer = async (uid, apiCall) => {
 
     if (userMealPlan === undefined) {
       console.log(`${uid} is undefined!`);
-      createMealPlanDoc(uid, apiCall);
     } else if (userMealPlan !== undefined) {
       //replaceDoc(uid, apiCall);
       console.log(`Got ${uid} from !server!`);
@@ -56,11 +51,6 @@ export const checkServer = async (uid, apiCall) => {
     return userMealPlan;
   } catch (e) {
     console.error(e);
-    console.log(
-      `No mealPlan doc for UID ${uid} on !SERVER!. Creating document...`
-    );
-
-    createMealPlanDoc(uid, apiCall);
   }
 };
 
@@ -97,5 +87,23 @@ export const replaceDocDay = async (uid, apiCall) => {
     console.log(`Replaced mealArray for UID ${uid}`);
   } catch (e) {
     console.error(`Error replacing Doc ${uid}`);
+  }
+};
+
+export const getMeals = async (uid) => {
+  const docRef = doc(db, "userMealPlans", uid);
+  // NOTE : Should I add a localStorage check here first?
+  try {
+    const doc = await getDocFromCache(docRef);
+    const meals = doc.data();
+    console.log("Got Meals from Cache!");
+
+    return meals;
+  } catch (e) {
+    console.log(e);
+
+    const doc = await getDocFromServer(docRef);
+    const meals = doc.data();
+    return meals;
   }
 };

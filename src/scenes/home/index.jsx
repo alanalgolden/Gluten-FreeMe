@@ -29,16 +29,27 @@ import {
 } from "react-allergens";
 import { useState } from "react";
 import { mealPlanInit } from "../../components/MealPlan/MakeMealPlanLite";
+import { useNavigate } from "react-router";
 
 const Home = () => {
   const theme = useTheme(); //grabs the theme from MUI
   const colors = tokens(theme.palette.mode);
   const { user, handleLogin } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const [allergens, setAllergens] = useState([]);
   const [mealPrepDays, setMealPrepDays] = useState([]);
   const [selectedDietChoices, setDietChoices] = useState([]);
   const [selectedReligiousRes, setReligiousRes] = useState([]);
+
+  const handlePlan = async () => {
+    const mealPlanFunc = await mealPlanInit(user.uid);
+
+    if (mealPlanFunc === "DISPLAY") {
+      navigate("/mealplan");
+    } else if (mealPlanFunc === "REGEN") {
+    }
+  };
 
   const handleAllergens = (allergen) => {
     const index = allergens.indexOf(allergen);
@@ -757,7 +768,8 @@ const Home = () => {
                 </Typography>
                 <Button
                   onClick={() => {
-                    !user ? handleLogin() : mealPlanInit(user.uid);
+                    //TODO : handleLogin needs to THEN run handlePlan after success
+                    !user ? handleLogin() : handlePlan();
                   }}
                   sx={{
                     backgroundColor: colors.greenAccent[700],

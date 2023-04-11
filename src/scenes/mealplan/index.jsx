@@ -23,10 +23,12 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import AddIcon from "@mui/icons-material/Add";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import CheckBoxOutlineBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlineBlankOutlined";
-const MealPLan = () => {
+import { MealContext } from "../../core/Providers/MealProvider";
+const MealPlan = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { user } = useContext(UserContext);
+  const { meals } = useContext(MealContext);
 
   const [expanded, setExpanded] = useState(false);
   const handleAccordion = (panel) => (event, isExpanded) => {
@@ -73,7 +75,7 @@ const MealPLan = () => {
                 <Item>
                   {/* SUNDAY */}
                   <Accordion
-                    defaultExpanded="true"
+                    defaultExpanded={true}
                     expanded={expanded === "panel1"}
                     onChange={handleAccordion("panel1")}
                     sx={{ backgroundColor: "transparent" }}
@@ -616,6 +618,7 @@ const MealPLan = () => {
                     >
                       <Item>
                         <Button
+                          onClick={() => console.log(meals)}
                           sx={{
                             backgroundColor: colors.greenAccent[700],
                             color: "white",
@@ -717,4 +720,4 @@ const MealPLan = () => {
   );
 };
 
-export default MealPLan;
+export default MealPlan;
