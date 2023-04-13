@@ -97,6 +97,7 @@ export const getMeals = async (uid) => {
     const doc = await getDocFromCache(docRef);
     const meals = doc.data();
     console.log("Got Meals from Cache!");
+    //console.log(meals);
 
     return meals;
   } catch (e) {

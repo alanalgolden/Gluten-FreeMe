@@ -24,16 +24,30 @@ import AddIcon from "@mui/icons-material/Add";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import CheckBoxOutlineBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlineBlankOutlined";
 import { MealContext } from "../../core/Providers/MealProvider";
+import { SundayRef } from "../../core/utils/days/sunDay";
+import { useRecipeContext } from "../../core/Providers/RecipeProvider";
+import { borderRadius } from "@mui/system";
+
 const MealPlan = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { user } = useContext(UserContext);
   const { meals } = useContext(MealContext);
+  const { recipes } = useRecipeContext();
 
   const [expanded, setExpanded] = useState(false);
   const handleAccordion = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+  let recipeName;
+  let nutrition;
+
+  if (recipes && recipes.length > 0) {
+    const firstRecipe = recipes[0];
+    recipeName = firstRecipe.name;
+    nutrition = firstRecipe.nutrition;
+  }
 
   return (
     <Box>
@@ -83,6 +97,7 @@ const MealPlan = () => {
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1bh-content"
+                      onClick={""}
                       id="panel1bh-header"
                       sx={{
                         backgroundColor: colors.primary[600],
@@ -101,48 +116,7 @@ const MealPlan = () => {
                         4/9
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails
-                      sx={{ backgroundColor: colors.primary[700] }}
-                    >
-                      <Item>
-                        <Box
-                          display="flex"
-                          justifyContent="space-between"
-                          alignItems="center"
-                        >
-                          <Typography textAlign="left">Meal 1</Typography>
-                          <IconButton>
-                            <ChevronRightIcon />
-                          </IconButton>
-                        </Box>
-                        <Typography>
-                          A delicious breakfast that is sure to get your day
-                          started right.
-                        </Typography>
-                      </Item>
-                      <Divider />
-                      <Item
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                      >
-                        <Typography textAlign="left">Meal 2</Typography>
-                        <IconButton>
-                          <ChevronRightIcon />
-                        </IconButton>
-                      </Item>
-                      <Divider />
-                      <Item
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="center"
-                      >
-                        <Typography textAlign="left">Meal 3</Typography>
-                        <IconButton>
-                          <ChevronRightIcon />
-                        </IconButton>
-                      </Item>
-                    </AccordionDetails>
+                    {!meals ? "Loading..." : <SundayRef />}
                   </Accordion>
 
                   {/* MONDAY */}
@@ -414,9 +388,17 @@ const MealPlan = () => {
                   justifyContent="space-between"
                   sx={{ mt: "20px" }}
                 >
-                  <Typography variant="h2" sx={{ ml: "10px" }}>
-                    Recipe Name
-                  </Typography>
+                  <Box display="flex">
+                    <Typography
+                      sx={{
+                        ml: "10px",
+                        whiteSpace: "nowrap",
+                        fontSize: "28px",
+                      }}
+                    >
+                      {!recipeName ? "< Select a meal" : recipeName}
+                    </Typography>
+                  </Box>
                   <Box sx={{ mr: "10px" }}>
                     <IconButton>
                       <AddIcon sx={{ fontSize: "28px" }} />
@@ -447,32 +429,71 @@ const MealPlan = () => {
                     <Divider sx={{ mt: "10px" }} />
                     <Box sx={{ m: "20px 0 20px 0" }}>
                       <Typography fontSize="18px">
-                        1. This is an example step for the recipes. <br />
-                        1. This is an example step for the recipes. <br /> 1.
-                        This is an example step for the recipes. <br /> 1. This
-                        is an example step for the recipes. <br /> 1. This is an
-                        example step for the recipes. <br />
-                        1. This is an example step for the recipes. <br />
-                        1. This is an example step for the recipes. <br /> 1.
-                        This is an example step for the recipes.
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                       </Typography>
                     </Box>
                     <Typography variant="h3">Recipe Instructions</Typography>
                     <Divider sx={{ mt: "10px" }} />
                     <Box sx={{ m: "20px 0 20px 0" }}>
                       <Typography fontSize="18px">
-                        1. This is an example step for the recipes. <br />
-                        1. This is an example step for the recipes. <br /> 1.
-                        This is an example step for the recipes. <br /> 1. This
-                        is an example step for the recipes. <br /> 1. This is an
-                        example step for the recipes. <br />
-                        1. This is an example step for the recipes. <br />
-                        1. This is an example step for the recipes. <br /> 1.
-                        This is an example step for the recipes.
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                       </Typography>
                     </Box>
                   </Grid>
                   <Grid md={3}>
+                    <Box
+                      sx={{
+                        backgroundColor: colors.primary[700],
+                        borderRadius: "10px 10px 0 0",
+                      }}
+                    >
+                      <Item textAlign="center">
+                        <Typography variant="h5" sx={{ fontWeight: 600 }}>
+                          Est. Nutrition
+                        </Typography>
+                      </Item>
+                    </Box>
+                    <Box
+                      sx={{
+                        backgroundColor: colors.primary[800],
+                        mb: "20px",
+                        borderRadius: "0 0 20px 20px",
+                      }}
+                    >
+                      <Item>
+                        <Box display="flex" flexDirection="column">
+                          <Typography sx={{ ml: "2px" }}>
+                            Calories: {!nutrition ? "" : nutrition.calories}
+                            <br />
+                          </Typography>
+                          <Typography sx={{ ml: "2px" }}>
+                            Carbs: {!nutrition ? "" : nutrition.carbohydrate}
+                            <br />
+                          </Typography>
+                          <Typography sx={{ ml: "2px" }}>
+                            Fat: {!nutrition ? "" : nutrition.fat}
+                            <br />
+                          </Typography>
+                          <Typography sx={{ ml: "2px" }}>
+                            Protein: {!nutrition ? "" : nutrition.protein}
+                            <br />
+                          </Typography>
+                        </Box>
+                      </Item>
+                    </Box>
+
                     <Box
                       sx={{
                         backgroundColor: colors.primary[700],
@@ -494,7 +515,8 @@ const MealPlan = () => {
                             />
                           </IconButton>
                           <Typography sx={{ ml: "2px" }}>
-                            Carrots <br />
+                            Carrots
+                            <br />
                           </Typography>
                         </Box>
                         <Box display="flex" alignItems="center">
@@ -597,6 +619,9 @@ const MealPlan = () => {
                     >
                       <Item>
                         <Button
+                          onClick={() =>
+                            console.log(meals.Monday.breakfast.name)
+                          }
                           sx={{
                             backgroundColor: colors.greenAccent[700],
                             color: "white",
@@ -641,7 +666,7 @@ const MealPlan = () => {
               sx={{
                 backgroundColor: colors.primary[500],
                 mt: "25px",
-                borderRadius: "10px 10px 0 0",
+                borderRadius: "10px",
               }}
             >
               <Item>

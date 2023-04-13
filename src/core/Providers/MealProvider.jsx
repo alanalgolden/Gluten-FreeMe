@@ -13,13 +13,13 @@ export const MealProvider = ({ children }) => {
 
   useEffect(() => {
     const mealLoader = () => {
-      // TODO 10:13PM 4/10/23 - Need to figure out how to get mealContext
-      getMeals(user.uid)
-        .then((response) => response.json())
-        .then((result) => setMeals(result.results[0]))
-        .catch((error) => console.log("An error occured"));
+      if (user) {
+        getMeals(user.uid)
+          .then((result) => setMeals(result))
+          .catch((error) => console.log(`An error occured + ${error}`));
 
-      console.log(meals);
+        console.log(meals);
+      }
       //setMeals(result.results[0]);
     };
 
@@ -27,7 +27,9 @@ export const MealProvider = ({ children }) => {
   }, []);
 
   return (
-    <MealContext.Provider value={{ meals }}>{children}</MealContext.Provider>
+    <MealContext.Provider value={{ meals, setMeals }}>
+      {children}
+    </MealContext.Provider>
   );
 };
 
