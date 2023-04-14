@@ -21,7 +21,7 @@ export const SundayRef = (expanded) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { meals } = useContext(MealContext);
-  const thisMeal = meals.Sunday;
+  const thisMeal = meals.mealArray.Sunday;
   const { recipes, addRecipe, removeRecipe, clearRecipes } = useRecipeContext();
   const [cleared, setCleared] = useState(false);
   const [newRecipe, setNewRecipe] = useState(null);

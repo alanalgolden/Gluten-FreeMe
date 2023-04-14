@@ -1,0 +1,331 @@
+{
+  "Monday": {
+    "breakfast": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "lunch": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "dinner": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    }
+  },
+  "Tuesday": {
+    "breakfast": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "lunch": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "dinner": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    }
+  },
+  "Wednesday": {
+    "breakfast": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "lunch": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "dinner": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    }
+  },
+  "Thursday": {
+    "breakfast": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "lunch": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "dinner": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    }
+  },
+  "Friday": {
+    "breakfast": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "lunch": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "dinner": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    }
+  },
+  "Saturday": {
+    "breakfast": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "lunch": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "dinner": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    }
+  },
+  "Sunday": {
+    "breakfast": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "lunch": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    },
+    "dinner": {
+      "name": "BLANK",
+      "nutrition": {
+        "calories": "BLANK",
+        "fat": "BLANK",
+        "carbohydrate": "BLANK",
+        "protein": "BLANK"
+      },
+      "preferences": {
+        "dietarychoices": "BLANK",
+        "allergies": "ARRAY",
+        "restrictions": "ARRAY",
+        "days": "ARRAY"
+      }
+    }
+  }
+}

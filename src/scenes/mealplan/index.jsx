@@ -9,7 +9,7 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { tokens } from "../../theme";
 import { UserContext } from "../../core/Providers/UserProvider";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -26,7 +26,13 @@ import CheckBoxOutlineBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlin
 import { MealContext } from "../../core/Providers/MealProvider";
 import { SundayRef } from "../../core/utils/days/sunDay";
 import { useRecipeContext } from "../../core/Providers/RecipeProvider";
-import { borderRadius } from "@mui/system";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import { MondayRef } from "../../core/utils/days/monDay";
+import { TuesdayRef } from "../../core/utils/days/tuesDay";
+import { WednesdayRef } from "../../core/utils/days/wednesDay";
+import { ThursdayRef } from "../../core/utils/days/thursDay";
+import { FridayRef } from "../../core/utils/days/friDay";
+import { SaturdayRef } from "../../core/utils/days/saturDay";
 
 const MealPlan = () => {
   const theme = useTheme();
@@ -34,11 +40,24 @@ const MealPlan = () => {
   const { user } = useContext(UserContext);
   const { meals } = useContext(MealContext);
   const { recipes } = useRecipeContext();
-
   const [expanded, setExpanded] = useState(false);
   const handleAccordion = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+  const [mealAllergies, setMealAllergies] = useState();
+
+  useEffect(() => {
+    const allergiesListener = () => {
+      if (meals) {
+        setMealAllergies(
+          meals.mealArray.Sunday.breakfast.preferences.allergies
+        );
+      }
+    };
+
+    allergiesListener();
+  }, [meals]);
 
   let recipeName;
   let nutrition;
@@ -121,13 +140,19 @@ const MealPlan = () => {
 
                   {/* MONDAY */}
                   <Accordion
+                    defaultExpanded={true}
                     expanded={expanded === "panel2"}
                     onChange={handleAccordion("panel2")}
+                    sx={{ backgroundColor: "transparent" }}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel2bh-content"
+                      onClick={""}
                       id="panel2bh-header"
+                      sx={{
+                        backgroundColor: colors.primary[600],
+                      }}
                     >
                       <Typography sx={{ width: "66%", flexShrink: 0 }}>
                         Monday
@@ -142,24 +167,24 @@ const MealPlan = () => {
                         4/10
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Donec placerat, lectus sed mattis semper, neque lectus
-                        feugiat lectus, varius pulvinar diam eros in elit.
-                        Pellentesque convallis laoreet laoreet.
-                      </Typography>
-                    </AccordionDetails>
+                    {!meals ? "Loading..." : <MondayRef />}
                   </Accordion>
 
                   {/* TUESDAY */}
                   <Accordion
+                    defaultExpanded={true}
                     expanded={expanded === "panel3"}
                     onChange={handleAccordion("panel3")}
+                    sx={{ backgroundColor: "transparent" }}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel3bh-content"
+                      onClick={""}
                       id="panel3bh-header"
+                      sx={{
+                        backgroundColor: colors.primary[600],
+                      }}
                     >
                       <Typography sx={{ width: "66%", flexShrink: 0 }}>
                         Tuesday
@@ -174,24 +199,24 @@ const MealPlan = () => {
                         4/11
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Nunc vitae orci ultricies, auctor nunc in, volutpat
-                        nisl. Integer sit amet egestas eros, vitae egestas
-                        augue. Duis vel est augue.
-                      </Typography>
-                    </AccordionDetails>
+                    {!meals ? "Loading..." : <TuesdayRef />}
                   </Accordion>
 
                   {/* WEDNESDAY */}
                   <Accordion
+                    defaultExpanded={true}
                     expanded={expanded === "panel4"}
                     onChange={handleAccordion("panel4")}
+                    sx={{ backgroundColor: "transparent" }}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel4bh-content"
+                      onClick={""}
                       id="panel4bh-header"
+                      sx={{
+                        backgroundColor: colors.primary[600],
+                      }}
                     >
                       <Typography sx={{ width: "66%", flexShrink: 0 }}>
                         Wednesday
@@ -206,24 +231,24 @@ const MealPlan = () => {
                         4/12
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Nunc vitae orci ultricies, auctor nunc in, volutpat
-                        nisl. Integer sit amet egestas eros, vitae egestas
-                        augue. Duis vel est augue.
-                      </Typography>
-                    </AccordionDetails>
+                    {!meals ? "Loading..." : <WednesdayRef />}
                   </Accordion>
 
                   {/* THURSDAY */}
                   <Accordion
+                    defaultExpanded={true}
                     expanded={expanded === "panel5"}
                     onChange={handleAccordion("panel5")}
+                    sx={{ backgroundColor: "transparent" }}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel5bh-content"
+                      onClick={""}
                       id="panel5bh-header"
+                      sx={{
+                        backgroundColor: colors.primary[600],
+                      }}
                     >
                       <Typography sx={{ width: "66%", flexShrink: 0 }}>
                         Thursday
@@ -238,24 +263,24 @@ const MealPlan = () => {
                         4/13
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Nunc vitae orci ultricies, auctor nunc in, volutpat
-                        nisl. Integer sit amet egestas eros, vitae egestas
-                        augue. Duis vel est augue.
-                      </Typography>
-                    </AccordionDetails>
+                    {!meals ? "Loading..." : <ThursdayRef />}
                   </Accordion>
 
                   {/* FRIDAY */}
                   <Accordion
+                    defaultExpanded={true}
                     expanded={expanded === "panel6"}
                     onChange={handleAccordion("panel6")}
+                    sx={{ backgroundColor: "transparent" }}
                   >
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel6bh-content"
+                      onClick={""}
                       id="panel6bh-header"
+                      sx={{
+                        backgroundColor: colors.primary[600],
+                      }}
                     >
                       <Typography sx={{ width: "66%", flexShrink: 0 }}>
                         Friday
@@ -270,17 +295,12 @@ const MealPlan = () => {
                         4/14
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography>
-                        Nunc vitae orci ultricies, auctor nunc in, volutpat
-                        nisl. Integer sit amet egestas eros, vitae egestas
-                        augue. Duis vel est augue.
-                      </Typography>
-                    </AccordionDetails>
+                    {!meals ? "Loading..." : <FridayRef />}
                   </Accordion>
 
                   {/* SATURDAY */}
                   <Accordion
+                    defaultExpanded={true}
                     expanded={expanded === "panel7"}
                     onChange={handleAccordion("panel7")}
                     sx={{ backgroundColor: "transparent" }}
@@ -288,6 +308,7 @@ const MealPlan = () => {
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel7bh-content"
+                      onClick={""}
                       id="panel7bh-header"
                       sx={{
                         backgroundColor: colors.primary[600],
@@ -306,18 +327,43 @@ const MealPlan = () => {
                         4/15
                       </Typography>
                     </AccordionSummary>
-                    <AccordionDetails
-                      sx={{
-                        backgroundColor: colors.primary[400],
-                      }}
-                    >
-                      <Typography>
-                        Nunc vitae orci ultricies, auctor nunc in, volutpat
-                        nisl. Integer sit amet egestas eros, vitae egestas
-                        augue. Duis vel est augue.
-                      </Typography>
-                    </AccordionDetails>
+                    {!meals ? "Loading..." : <SaturdayRef />}
                   </Accordion>
+                </Item>
+              </Box>
+              <Box
+                width="250px"
+                sx={{
+                  backgroundColor: colors.primary[500],
+                  mt: "25px",
+                  borderRadius: "10px 10px 10px 10px",
+                }}
+              >
+                <Item>
+                  <Typography
+                    display="flex"
+                    justifyContent="center"
+                    variant="h5"
+                    sx={{ fontWeight: 600 }}
+                  >
+                    Allergens
+                  </Typography>
+                </Item>
+                <Item
+                  sx={{
+                    backgroundColor: colors.primary[600],
+                    borderRadius: "0 0 10px 10px",
+                  }}
+                >
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                  >
+                    <Box sx={{ width: "75%", ml: "10px" }}>
+                      <Typography>{`${mealAllergies}`}</Typography>
+                    </Box>
+                  </Box>
                 </Item>
               </Box>
               <Box
@@ -425,7 +471,13 @@ const MealPlan = () => {
               <Item>
                 <Grid container columns={{ md: 12 }} spacing={2}>
                   <Grid md={9}>
-                    <Typography variant="h3">Preparation</Typography>
+                    <Box display="flex" justifyContent="space-between">
+                      <Typography variant="h3">Preparation</Typography>
+                      <IconButton>
+                        <PlayArrowIcon />
+                      </IconButton>
+                    </Box>
+
                     <Divider sx={{ mt: "10px" }} />
                     <Box sx={{ m: "20px 0 20px 0" }}>
                       <Typography fontSize="18px">
@@ -682,6 +734,7 @@ const MealPlan = () => {
                   <Typography variant="h3">Grocery List</Typography>
                   <Box display="flex" alignItems="center">
                     <Button
+                      onClick={() => console.log(mealAllergies)}
                       sx={{
                         backgroundColor: colors.greenAccent[700],
                         color: "white",

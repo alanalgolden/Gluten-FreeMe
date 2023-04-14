@@ -72,7 +72,8 @@ export const replaceDoc = async (uid, apiCall) => {
     });
     console.log(`Replaced mealArray for UID ${uid}`);
   } catch (e) {
-    console.error(`Error replacing Doc ${uid}`);
+    console.error(`Error replacing Doc.. trying to create new ${uid}: ${e}`);
+    await createMealPlanDoc(uid, apiCall);
   }
 };
 
@@ -82,7 +83,7 @@ export const replaceDocDay = async (uid, apiCall) => {
 
   try {
     await updateDoc(docRef, {
-      mealArray: apiCall,
+      apiCall,
     });
     console.log(`Replaced mealArray for UID ${uid}`);
   } catch (e) {

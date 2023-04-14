@@ -28,13 +28,19 @@ import {
   SoyaIcon,
 } from "react-allergens";
 import { useState } from "react";
-import { mealPlanInit } from "../../components/MealPlan/MakeMealPlanLite";
+import {
+  askForMeal,
+  mealPlanInit,
+} from "../../components/MealPlan/MakeMealPlanLite";
 import { useNavigate } from "react-router";
+import { replaceDoc } from "../../components/MealPlan/MealPlanCrud";
+import { MealContext } from "../../core/Providers/MealProvider";
 
 const Home = () => {
   const theme = useTheme(); //grabs the theme from MUI
   const colors = tokens(theme.palette.mode);
   const { user, handleLogin } = useContext(UserContext);
+  const { meals } = useContext(MealContext);
   const navigate = useNavigate();
 
   const [allergens, setAllergens] = useState([]);
@@ -48,6 +54,21 @@ const Home = () => {
     if (mealPlanFunc === "DISPLAY") {
       navigate("/mealplan");
     } else if (mealPlanFunc === "REGEN") {
+      console.log("trying askForMeal");
+      try {
+        const meal = await askForMeal(
+          selectedDietChoices,
+          allergens,
+          selectedReligiousRes,
+          mealPrepDays
+        );
+        const mealJson = JSON.parse(meal.data.choices[0].message.content);
+
+        await replaceDoc(user.uid, mealJson);
+        console.log(meal.data.choices[0].message.content);
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
@@ -140,6 +161,7 @@ const Home = () => {
               </Item>
               <Item display="flex" justifyContent="center">
                 <Button
+                  onClick={() => console.log(meals)}
                   sx={{
                     backgroundColor: colors.greenAccent[700],
                     color: "white",
