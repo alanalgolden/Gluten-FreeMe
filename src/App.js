@@ -9,6 +9,7 @@ import Aitest from "./scenes/aitest";
 import Subscriptions from "./scenes/subscriptions";
 import Home from "./scenes/home";
 import MealPLan from "./scenes/mealplan";
+import CreateMealPlan from "./scenes/mealplan/createplan";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -27,6 +28,7 @@ function App() {
               <Route path="/subscriptions" element={<Subscriptions />} />
               <Route path="/home" element={<Home />} />
               <Route path="/mealplan" element={<MealPLan />} />
+              <Route path="/createplan" element={<CreateMealPlan />} />
             </Routes>
           </main>
         </div>

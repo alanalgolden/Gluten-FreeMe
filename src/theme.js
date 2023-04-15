@@ -127,6 +127,22 @@ export const tokens = (mode) => ({
           800: "#c3c6fd",
           900: "#e1e2fe",
         },
+        blueGradient: {
+          100: "#e5f9f3",
+          200: "#f2fcf9",
+          300: "#84eefc",
+          400: "#ddf7ef",
+          500: "#a1dee7",
+          600: "#419eab",
+          700: "#225358",
+        },
+        blacks: {
+          100: "#222021",
+          200: "#363636",
+          300: "#3E454B",
+          400: "#48494B",
+          500: "#787276",
+        },
         allergenColors: {
           100: "#ee7440",
           200: "#804330",
@@ -181,30 +197,30 @@ export const themeSettings = (mode) => {
           }),
     },
     typography: {
-      fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+      fontFamily: ["Cambria", "serif"].join(","), //CHANGING FROM: ["Source Sans Pro", "sans-serif"].join(",")
       fontSize: 12,
       h1: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Cambria", "serif"].join(","),
         fontSize: 40,
       },
       h2: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Cambria", "serif"].join(","),
         fontSize: 32,
       },
       h3: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Cambria", "serif"].join(","),
         fontSize: 24,
       },
       h4: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Cambria", "serif"].join(","),
         fontSize: 20,
       },
       h5: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Cambria", "serif"].join(","),
         fontSize: 16,
       },
       h6: {
-        fontFamily: ["Source Sans Pro", "sans-serif"].join(","),
+        fontFamily: ["Cambria", "serif"].join(","),
         fontSize: 14,
       },
     },

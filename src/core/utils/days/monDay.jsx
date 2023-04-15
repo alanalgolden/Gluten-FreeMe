@@ -16,6 +16,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { MealContext } from "../../../core/Providers/MealProvider";
 import { tokens } from "../../../theme";
 import { useRecipeContext } from "../../Providers/RecipeProvider";
+import PropTypes from "prop-types";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 
 export const MondayRef = (expanded) => {
   const theme = useTheme();
