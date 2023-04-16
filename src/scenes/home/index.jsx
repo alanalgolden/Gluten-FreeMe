@@ -13,8 +13,6 @@ import { UserContext } from "../../core/Providers/UserProvider";
 import { tokens } from "../../theme";
 import Item from "@mui/material/Unstable_Grid2";
 import InfoIcon from "@mui/icons-material/Info";
-import DoNotDisturbIcon from "@mui/icons-material/DoNotDisturb";
-import TempleHinduIcon from "@mui/icons-material/TempleHindu";
 import MosqueIcon from "@mui/icons-material/Mosque";
 import SynagogueIcon from "@mui/icons-material/Synagogue";
 import NoDrinksIcon from "@mui/icons-material/NoDrinks";

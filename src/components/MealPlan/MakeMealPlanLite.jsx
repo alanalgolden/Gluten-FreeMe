@@ -3,6 +3,7 @@ import { checkCache, checkServer, createMealPlanDoc } from "./MealPlanCrud";
 
 let mealPlan = ``;
 
+// The askForMeal function contain the raw text JSON String that is passed to GPT.
 export const askForMeal = async (
   dietarychoices,
   allergens,
@@ -84,369 +85,43 @@ export const askForMeal = async (
   }
 };
 
+// Called by button in Home, creates the MealPlan and handles the saving in Firestore.
 export async function mealPlanInit(user) {
   let mealPlanHigh = undefined;
 
   const BLANK = "BLANK";
 
+  // * As GPT costs tokens to run, we want to be able to save the data which requires the user to be logged in. This tries to make the meal plan ONLY if user is logged in.
   try {
+    // ? Checks if user is undefined. Can this be repurposed to prompt user login?
     if (user === undefined || null) {
       console.log("No user!");
       return;
     }
 
+    // Checks cache to see if there is a userMealPlan
     if ((await checkCache(user, mealPlanHigh)) === undefined) {
       console.log("No meal plan found in CACHE");
 
+      // If there is NOT a userMealPlan in the cache, check the Server for it.
       if ((await checkServer(user, mealPlanHigh)) === undefined) {
         console.log("No meal plan found in SERVER");
         console.log("Creating Meal Plan...");
 
+        //If there is NOT a userMealPlan in the server, then askForMeal().
+        //! This should be modified to not directly send to GPT, depending on where final implementation is.
         askForMeal();
-        /*         const mealPlan = await FetchDataChat(`
-        "Fill in the blanks for a 7 day meal plan with breakfast lunch and dinner. Average calorie count per meal should be 500. 
-        Only give the names of the recipes and their est nutrition facts. 
-        All recipes should be Gluten Free and Tree Nut Free. Json Format. 
-        "
-        {
-          "Monday": {
-            "breakfast": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "lunch": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "dinner": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            }
-          },
-          "Tuesday": {
-            "breakfast": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "lunch": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "dinner": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            }
-          },
-          "Wednesday": {
-            "breakfast": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "lunch": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "dinner": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            }
-          },
-          "Thursday": {
-            "breakfast": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "lunch": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "dinner": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            }
-          },
-          "Friday": {
-            "breakfast": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "lunch": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "dinner": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            }
-          },
-          "Saturday": {
-            "breakfast": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "lunch": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "dinner": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            }
-          },
-          "Sunday": {
-            "breakfast": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "lunch": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            },
-            "dinner": {
-              "name": BLANK,
-              "nutrition": {
-                "calories": BLANK,
-                "fat": BLANK,
-                "carbohydrate": BLANK,
-                "protein": BLANK
-              },
-              "preferences": {
-                "dietarychoices": BLANK,
-                "allergies": BLANK,
-                "restrictions": BLANK,
-                "days": BLANK
-              }
-            }
-          }
-        }
-        `); */
 
         while (mealPlanHigh === undefined) {
           try {
+            // * Because GPT will sometimes return an ambigous response that cannot be parsed by JSON.parse, it TRIES to parse it. If it fails, then it prompts GPT again.
             console.log(`Trying to parse ${{ ...mealPlan }}`);
             mealPlanHigh = JSON.parse(mealPlan.data.choices[0].message.content);
-            //TODO : This needs to be improved with better UI / passes, basic function for testing
+
+            //TODO: This needs to be improved with better UI / passes, basic function for testing
             console.log(`Doc found for ${user} in CACHE!`);
+
+            //TODO: This is a placeholder for user prompt, needs to be refined.
             let planAction = prompt("DISPLAY or REGEN?");
             if (planAction === "REGEN") {
               console.log(`${planAction} is not yet programmed.`);
@@ -458,232 +133,27 @@ export async function mealPlanInit(user) {
             console.log(e);
             console.log("JSON Parse FAILED. Trying again GPT again...");
 
+            // * Because GPT will sometimes return an ambigous response that cannot be parsed by JSON.parse, it TRIES to parse it. If it fails, then it prompts GPT again here.
             askForMeal();
-            /*             const mealPlan = await FetchDataChat(`
-            "Fill in the blanks for a 7 day meal plan with breakfast lunch and dinner. Average calorie count per meal should be 500. 
-            Only give the names of the recipes and their est nutrition facts. 
-            All recipes should be Gluten Free and Tree Nut Free. Json Format. 
-            "
-            {
-              "Monday": {
-                "breakfast": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                    }
-                  },
-                "lunch": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                },
-                "dinner": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                }
-              },
-              "Tuesday": {
-                "breakfast": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                    }
-                  },
-                "lunch": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                },
-                "dinner": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                }
-              },
-              "Wednesday": {
-                "breakfast": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                    }
-                  },
-                "lunch": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                },
-                "dinner": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                }
-              },
-              "Thursday": {
-                "breakfast": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                    }
-                  },
-                "lunch": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                },
-                "dinner": {
-                  "name": BLANK
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                }
-              },
-              "Friday": {
-                "breakfast": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                    }
-                  },
-                "lunch": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                },
-                "dinner": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                }
-              },
-              "Saturday": {
-                "breakfast": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                    }
-                  },
-                "lunch": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                },
-                "dinner": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                }
-              },
-              "Sunday": {
-                "breakfast": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                    }
-                  },
-                "lunch": {
-                  "name": BLANK,
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                },
-                "dinner": {
-                  "name": BLANK
-                  "nutrition": {
-                    "calories": BLANK,
-                    "fat": BLANK,
-                    "carbohydrate": BLANK,
-                    "protein": BLANK
-                  }
-                }
-              }"
-          `); */
 
+            // * As this is still in the while loop, it will try the JSON.parse on new GPT response. It will keep trying until it is successful.
             mealPlanHigh = JSON.parse(mealPlan.data.choices[0].message.content);
             console.log(`JSON Parse Worked! ${mealPlanHigh}`);
           }
         }
 
+        //If the try statement gets here, the mealPlan will be created using the UID.
         createMealPlanDoc(user, mealPlanHigh);
         console.log(mealPlanHigh);
       } else {
+        //If there is already a user in the Server, then prompt user for action.
         console.log(`Document UID ${user} already exists!`);
         let regenDoc = prompt("DISPLAY or REGEN?");
         console.log(regenDoc);
       }
     } else {
-      //TODO : This needs to be improved with better UI / passes, basic function for testing
+      //* This runs if it does return a mealPlan from cache.
+      //TODO: This needs to be improved with better UI / passes, basic function for testing.
       console.log(`Doc found for ${user} in CACHE!`);
       let planAction = prompt("DISPLAY or REGEN?");
       if (planAction === "REGEN") {

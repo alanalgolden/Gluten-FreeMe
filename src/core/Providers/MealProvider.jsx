@@ -1,10 +1,12 @@
 import React, { createContext, useState, useContext } from "react";
 import { useEffect } from "react";
+
 import { getMeals } from "../../components/MealPlan/MealPlanCrud";
 import { UserContext } from "../../core/Providers/UserProvider";
 
 export const MealContext = createContext();
 
+// * This sets the currently selected Meal.
 export const MealProvider = ({ children }) => {
   //should I store in local storage first?
 
@@ -20,7 +22,6 @@ export const MealProvider = ({ children }) => {
 
         console.log(meals);
       }
-      //setMeals(result.results[0]);
     };
 
     mealLoader();
@@ -32,5 +33,3 @@ export const MealProvider = ({ children }) => {
     </MealContext.Provider>
   );
 };
-
-//why does this crash my react web :()

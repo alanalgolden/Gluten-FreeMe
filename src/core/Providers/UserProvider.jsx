@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState } from "react";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { auth, provider } from "../../firebase";
 import { checkAndCreateUserDoc } from "../utils/crud";
@@ -6,6 +6,7 @@ import { checkAndCreateUserDoc } from "../utils/crud";
 export const UserContext = createContext(null);
 export const user = UserContext.uid;
 
+// * Creates global User Context.
 export const UserProvider = ({ children }) => {
   const loadUserFromLocalStorage = () => {
     const storedUser = localStorage.getItem("user");
@@ -16,6 +17,7 @@ export const UserProvider = ({ children }) => {
   };
   const [user, setUser] = useState(loadUserFromLocalStorage);
 
+  // * Prompts user with GoogleAuth Popup, through Firebase.
   const handleLogin = async () => {
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -40,6 +42,7 @@ export const UserProvider = ({ children }) => {
       });
   };
 
+  // * Logs out currently signed in user.
   const handleLogout = () => {
     signOut(auth)
       .then(() => {

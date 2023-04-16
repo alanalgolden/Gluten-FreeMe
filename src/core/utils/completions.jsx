@@ -1,5 +1,7 @@
 import axios from "axios";
 
+//Sends a prompt to GPT, using completions.
+// ! gpt-3.5-turbo is not currently available with completions, making this deprecated.
 export const FetchData = async (props) => {
   const apiKey = process.env.REACT_APP_OPEN_AI_API_KEY;
 
@@ -23,6 +25,7 @@ export const FetchData = async (props) => {
   return response.data.choices[0].text;
 };
 
+// * Sends a prompt to GPT, using gpt-3.5-turbo.
 export const FetchDataChat = async (props) => {
   const apiKey = process.env.REACT_APP_OPEN_AI_API_KEY;
 

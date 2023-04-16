@@ -1,14 +1,14 @@
-import { db } from "../../firebase";
-import { user } from "../../core/Providers/UserProvider";
 import {
   doc,
   getDocFromCache,
   getDocFromServer,
-  serverTimestamp,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
 
+import { db } from "../../firebase";
+
+// * Checks the Cache for a mealPlan using User UID.
 export const checkCache = async (uid, apiCall) => {
   const docRef = doc(db, "userMealPlans", uid);
 
@@ -31,6 +31,7 @@ export const checkCache = async (uid, apiCall) => {
   }
 };
 
+// * Checks the Server for a mealPlan using User UID.
 export const checkServer = async (uid, apiCall) => {
   const docRef = doc(db, "userMealPlans", uid);
 
@@ -54,6 +55,7 @@ export const checkServer = async (uid, apiCall) => {
   }
 };
 
+// * Creates a mealPlanDoc with User UID as document name, if document doesn't already exist.
 export const createMealPlanDoc = async (uid, apiCall) => {
   try {
     await setDoc(doc(db, "userMealPlans", uid), apiCall);
@@ -63,6 +65,7 @@ export const createMealPlanDoc = async (uid, apiCall) => {
   }
 };
 
+// * Updates a mealPlanDoc that already exists with new information. Currently only updating mealArray.
 export const replaceDoc = async (uid, apiCall) => {
   const docRef = doc(db, "userMealPlans", uid);
 
@@ -77,6 +80,7 @@ export const replaceDoc = async (uid, apiCall) => {
   }
 };
 
+// ? Is this used anywhere instead of replaceDoc? They do the same thing, with the exception of this just passing in apiCall directly rather than assigning it to the mealArray.
 // TODO : Replace Single day in the Doc Array (reconstruct the Doc in another function, add the new recipe?)
 export const replaceDocDay = async (uid, apiCall) => {
   const docRef = doc(db, "userMealPlans", uid);
@@ -91,6 +95,8 @@ export const replaceDocDay = async (uid, apiCall) => {
   }
 };
 
+// * Attempts to get the Meals from the cache, if it is unable to then it attempts to get it from the Server.
+// ? Should I have it check localStorage as well?
 export const getMeals = async (uid) => {
   const docRef = doc(db, "userMealPlans", uid);
   // NOTE : Should I add a localStorage check here first?

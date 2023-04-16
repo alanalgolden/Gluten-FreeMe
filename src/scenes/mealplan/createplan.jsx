@@ -1,21 +1,9 @@
-import {
-  useTheme,
-  Box,
-  Typography,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Divider,
-  IconButton,
-  Button,
-} from "@mui/material";
-import { useContext, useState, useEffect } from "react";
+import { useTheme, Box } from "@mui/material";
+import { useContext } from "react";
 import { tokens } from "../../theme";
 import { UserContext } from "../../core/Providers/UserProvider";
 import Grid from "@mui/material/Unstable_Grid2";
-import Item from "@mui/material/Unstable_Grid2";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
+
 import WeeklyMealButtons from "./mealButtons";
 
 const CreateMealPlan = () => {

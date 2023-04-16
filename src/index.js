@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
+
 import { BrowserRouter } from "react-router-dom";
-import { Auth0Provider } from "@auth0/auth0-react";
-import { UserProvider } from "./core/Providers/UserProvider";
 import { MealProvider } from "./core/Providers/MealProvider";
 import { RecipeProvider } from "./core/Providers/RecipeProvider";
+import { UserProvider } from "./core/Providers/UserProvider";
+
+import App from "./App";
+import "./index.css";
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENTID;

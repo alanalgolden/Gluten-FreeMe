@@ -1,14 +1,14 @@
 import { ColorModeContext, useMode } from "./theme";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { Routes, Route } from "react-router-dom";
+
 import Topbar from "./scenes/global/Topbar";
+import Aitest from "./scenes/aitest";
 import Dashboard from "./scenes/dashboard";
 import Profile from "./components/Profile";
-import SideBar from "./scenes/global/Sidebar";
-import Aitest from "./scenes/aitest";
 import Subscriptions from "./scenes/subscriptions";
 import Home from "./scenes/home";
-import MealPLan from "./scenes/mealplan";
+import MealPlan from "./scenes/mealplan";
 import CreateMealPlan from "./scenes/mealplan/createplan";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
               <Route path="/aitest" element={<Aitest />} />
               <Route path="/subscriptions" element={<Subscriptions />} />
               <Route path="/home" element={<Home />} />
-              <Route path="/mealplan" element={<MealPLan />} />
+              <Route path="/mealplan" element={<MealPlan />} />
               <Route path="/createplan" element={<CreateMealPlan />} />
             </Routes>
           </main>

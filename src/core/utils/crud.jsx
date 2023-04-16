@@ -17,8 +17,9 @@ import {
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
+// ! THIS NEEDS TO BE AUDITED FOR FUNCTIONALITY + CLARITY (4/16/23)
+
 const cacheData = collection(db, "Users");
-const serverData = collection(db, "Users");
 const dbName = "Users";
 const spices = "spices";
 const stock = "stock";

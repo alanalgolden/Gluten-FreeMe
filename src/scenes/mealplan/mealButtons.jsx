@@ -1,18 +1,6 @@
-import {
-  useTheme,
-  Box,
-  Typography,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Divider,
-  IconButton,
-  Button,
-  Paper,
-} from "@mui/material";
+import { useTheme, Typography, Paper } from "@mui/material";
 import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 import PropTypes from "prop-types";
-import Item from "@mui/material/Unstable_Grid2";
 import { tokens } from "../../theme";
 import Grid from "@mui/material/Unstable_Grid2";
 import React from "react";

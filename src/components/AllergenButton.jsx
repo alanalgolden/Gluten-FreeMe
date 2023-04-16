@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+//TODO: This seems to be unused. Confirm?
 const AllergenButton = ({
   allergen,
   selectedAllergens,

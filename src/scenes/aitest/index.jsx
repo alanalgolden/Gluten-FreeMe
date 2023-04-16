@@ -1,9 +1,7 @@
 import { Box, Divider, IconButton, Input, Typography } from "@mui/material";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useState, useEffect, useContext } from "react";
-import { db } from "../../firebase";
-import { getDoc, collection, getDocs, doc } from "firebase/firestore";
+import { useState, useContext } from "react";
 import RefreshIcon from "@mui/icons-material/Refresh";
 
 import { getIngredients } from "../../core/utils/crud";

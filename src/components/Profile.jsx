@@ -3,6 +3,7 @@ import { Box, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import React from "react";
 
+//TODO: Does this do anything? It seems like there are no references, and uses Auth0 rather than Firebase auth.
 const Profile = () => {
   const { user, isAuthenticated } = useAuth0();
 

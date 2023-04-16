@@ -1,12 +1,6 @@
 import { tokens } from "../../theme";
 import { useTheme, IconButton, Box, Typography, Fade } from "@mui/material";
-import {
-  Sidebar,
-  Menu,
-  MenuItem,
-  SubMenu,
-  useProSidebar,
-} from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem, useProSidebar } from "react-pro-sidebar";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import PsychologyIcon from "@mui/icons-material/Psychology";

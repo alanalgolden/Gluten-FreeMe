@@ -1,4 +1,3 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import {
   Button,
   useTheme,
@@ -8,51 +7,28 @@ import {
   ListItemText,
   ListItemIcon,
 } from "@mui/material";
-import { tokens } from "../theme";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import React from "react";
+
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
-import { Link } from "react-router-dom";
-import { auth, provider } from "../firebase";
-import {
-  signInWithPopup,
-  signInWithRedirect,
-  GoogleAuthProvider,
-} from "firebase/auth";
-import { useState, createContext, useContext } from "react";
+
+import { tokens } from "../theme";
 import { UserContext } from "../core/Providers/UserProvider";
 
+//If no user exists, then show the "Login" Button. Use the handleLogin() function to set the UserContext.
 export const LoginButton = () => {
   const { user, handleLogin } = useContext(UserContext);
-
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
-  //const [user, setUser] = useState();
-  /*   const handleLogin = async () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken; // The signed-in user info.
-        const user = result.user;
-        console.log(user);
-        setUser(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        const email = error.customData.email;
-        const credential = GoogleAuthProvider.credentialFromError(error);
-        console.log(errorMessage + "ERROR MESSAGE");
-      });
-  }; */
 
   return (
     !user && (
       <Button
-        onClick={() => handleLogin() + console.log("User Logged in!")}
+        onClick={() => handleLogin()}
         sx={{
           mr: "10px",
           backgroundColor: "none",
@@ -66,6 +42,7 @@ export const LoginButton = () => {
   );
 };
 
+//If user exists & is logged in, show the Logout button. Use the handleLogout function to set the UserContext to undefined.
 export const LogoutButton = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -74,7 +51,7 @@ export const LogoutButton = () => {
   return (
     user && (
       <Button
-        onClick={() => handleLogout() + console.log("User Logged out!")}
+        onClick={() => handleLogout()}
         sx={{ mr: "10px", backgroundColor: colors.greenAccent[600] }}
       >
         Sign Out
@@ -83,6 +60,7 @@ export const LogoutButton = () => {
   );
 };
 
+//TODO : This is currently uncompleted. The SignUp button should work slightly differently than the login, and take user through tutorial.
 export const SignUpButton = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -103,7 +81,8 @@ export const SignUpButton = () => {
   );
 };
 
-export const MakeItEasyButton = () => {
+//The Topbar Dropdown work as access the different menus. Currently placeholder links/pages, needs refinement.
+export const TopbarDropdown = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 

@@ -1,44 +1,27 @@
 import { Box, IconButton, useTheme } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
-import { ColorModeContext, tokens } from "../../theme";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import BugReportIcon from "@mui/icons-material/BugReport";
+
 import {
   LoginButton,
-  LogoutButton,
-  MakeItEasyButton,
+  TopbarDropdown,
   SignUpButton,
 } from "../../components/TopbarButtons";
-import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../firebase";
+import { ColorModeContext, tokens } from "../../theme";
 import { UserContext } from "../../core/Providers/UserProvider";
 import AccountMenu from "../../components/AccountMenu";
 
 const Topbar = () => {
-  const theme = useTheme(); //grabs the theme from MUI
+  const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  //const { isLoading, error } = useAuth0();
-  //const [user, setUser] = useState();
   const { user } = useContext(UserContext);
-
-  /*   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        setUser(uid);
-        console.log(`USER AUTH LOG: ${user.displayName}`);
-      } else {
-        console.log("User is logged out, or no user.");
-      }
-    });
-  }, []); */
 
   return (
     <Box
@@ -49,6 +32,7 @@ const Topbar = () => {
         backgroundColor: colors.primary[500],
       }}
     >
+      {/* LOGO */}
       <Box>
         <Link to="/Home">
           <img
@@ -62,12 +46,14 @@ const Topbar = () => {
           />
         </Link>
       </Box>
+
+      {/* Topbar Dropdown */}
       <Box>
-        <MakeItEasyButton />
+        <TopbarDropdown />
       </Box>
 
+      {/* Search Bar - NO FUNCTIONALITY 3/31/23 */}
       <Box>
-        {/* Search Bar - NO FUNCTIONALITY 3/31/23 */}
         <Box
           display="flex"
           backgroundColor={colors.primary[400]}
@@ -83,8 +69,10 @@ const Topbar = () => {
           </IconButton>
         </Box>
       </Box>
+
       <Box display="flex">
-        {/* ICONS */}
+        {/* ICON BUTTONS */}
+        {/* Theme Change Button (sun/moon). Toggles colorMode from dark/light */}
         <IconButton onClick={colorMode.toggleColorMode}>
           {theme.palette.mode === "dark" ? (
             <DarkModeOutlinedIcon sx={{ height: "22px", width: "22px" }} />
@@ -98,13 +86,19 @@ const Topbar = () => {
             />
           )}
         </IconButton>
+
+        {/* TODO: This does not do anything  */}
         <IconButton onClick={() => ""}>
           <PersonOutlinedIcon />
         </IconButton>
+
+        {/* TODO: This currently just prints the user, can be used for testing. */}
         <IconButton onClick={() => console.log(user)}>
           <BugReportIcon />
         </IconButton>
+
         {/* USER AUTH */}
+        {/* If there isn't a user, display Login + SignUp Button. If there is a user, display AccountMenu */}
         {!user && (
           <>
             <LoginButton />

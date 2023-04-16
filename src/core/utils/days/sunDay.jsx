@@ -3,16 +3,12 @@ import {
   useTheme,
   Box,
   Typography,
-  Accordion,
   AccordionDetails,
-  AccordionSummary,
   Divider,
   IconButton,
-  Button,
 } from "@mui/material";
 import Item from "@mui/material/Unstable_Grid2";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { MealContext } from "../../../core/Providers/MealProvider";
 import { tokens } from "../../../theme";
 import { useRecipeContext } from "../../Providers/RecipeProvider";

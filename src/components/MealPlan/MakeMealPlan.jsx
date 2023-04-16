@@ -1,7 +1,7 @@
 import { FetchDataChat } from "../../core/utils/completions";
-import { checkCache, checkServer, createMealPlanDoc } from "./MealPlanCrud";
-import { user } from "../../core/Providers/UserProvider";
+import { createMealPlanDoc } from "./MealPlanCrud";
 
+//! DEPRECATED: This is currently outdated, as MakeMealPlanLite.jsx became the default for development, and is the current refined version.
 export async function mealPlanInit(user) {
   let mealPlanHigh = "";
   const BLANK = "BLANK";
