@@ -1,6 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { enableIndexedDbPersistence, getFirestore } from "@firebase/firestore";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  sendSignInLinkToEmail,
+  signInWithEmailLink,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -23,3 +28,5 @@ provider.setCustomParameters({
 
 export const db = getFirestore(app);
 enableIndexedDbPersistence(db);
+
+export { sendSignInLinkToEmail, signInWithEmailLink };

@@ -93,7 +93,7 @@ const AccountMenu = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {/* TODO: Doesn't link anywhere. My Profile (top option), with profile picture. */}
-        <MenuItem onClick={handleClose}>
+        <MenuItem component={Link} to="/profile" onClick={handleClose}>
           <Box display="flex" alignItems="center" textAlign="right">
             <Avatar src={photoURL} sx={{ width: 30, height: 30 }} />
             <Box display="block">

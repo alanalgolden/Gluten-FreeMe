@@ -8,19 +8,20 @@ import {
   ListItemIcon,
 } from "@mui/material";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import React from "react";
 
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import LocalGroceryStoreIcon from "@mui/icons-material/LocalGroceryStore";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
-
+import { useNavigate } from "react-router";
 import { tokens } from "../theme";
 import { UserContext } from "../core/Providers/UserProvider";
 
 //If no user exists, then show the "Login" Button. Use the handleLogin() function to set the UserContext.
 export const LoginButton = () => {
+  const navigate = useNavigate();
   const { user, handleLogin } = useContext(UserContext);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -28,7 +29,7 @@ export const LoginButton = () => {
   return (
     !user && (
       <Button
-        onClick={() => handleLogin()}
+        onClick={() => navigate("Login")} //handleLogin()
         sx={{
           mr: "10px",
           backgroundColor: "none",

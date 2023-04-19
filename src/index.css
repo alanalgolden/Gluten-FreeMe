@@ -124,3 +124,9 @@ body,
   transform: scale(0.95);
   transition: all 0.1s ease;
 }
+
+.Login-component {
+  background: url(../src/assets/loginBackground.png) no-repeat center center
+    fixed;
+  background-size: cover;
+}
