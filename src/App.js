@@ -19,6 +19,8 @@ import Home from "./scenes/home";
 import MealPlan from "./scenes/mealplan";
 import CreateMealPlan from "./scenes/mealplan/createplan";
 import LoginPage from "./scenes/login";
+import Preferences from "./scenes/preferences";
+import RecipePreferencesPage from "./scenes/recipebuilder/recipepreferences";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -57,21 +59,38 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app">
-          <main className="content">
-            <Topbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/aitest" element={<Aitest />} />
-              <Route path="/subscriptions" element={<Subscriptions />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/mealplan" element={<MealPlan />} />
-              <Route path="/createplan" element={<CreateMealPlan />} />
-            </Routes>
-          </main>
-        </div>
+        <html>
+          <head>
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap"
+            />
+            <link
+              rel="stylesheet"
+              href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+            />
+          </head>
+          <div className="app">
+            <main className="content">
+              <Topbar />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/aitest" element={<Aitest />} />
+                <Route path="/subscriptions" element={<Subscriptions />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/mealplan" element={<MealPlan />} />
+                <Route path="/createplan" element={<CreateMealPlan />} />
+                <Route path="/preferences" element={<Preferences />} />
+                <Route
+                  path="/Build-a-meal"
+                  element={<RecipePreferencesPage />}
+                />
+              </Routes>
+            </main>
+          </div>
+        </html>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
