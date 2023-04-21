@@ -14,7 +14,7 @@ export const askForMeal = async (
   console.log(allergens.join(", "));
 
   try {
-    let mealPlan = await FetchDataChat(`
+    mealPlan = await FetchDataChat(`
   "You will copy the following JSON schema for 7 days and fill in blanks with a meal plan.
   Each day will include 3 meals: breafast, lunch, and dinner.
   Give names for each meal, use real recipe names.

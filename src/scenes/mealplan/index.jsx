@@ -33,6 +33,11 @@ import { WednesdayRef } from "../../core/utils/days/wednesDay";
 import { ThursdayRef } from "../../core/utils/days/thursDay";
 import { FridayRef } from "../../core/utils/days/friDay";
 import { SaturdayRef } from "../../core/utils/days/saturDay";
+import {
+  askForIngredients,
+  makeIngredients,
+} from "../../components/Ingredients/MakeIngredients";
+import { createRecipeIngredients } from "../../components/Ingredients/IngredientsCrud";
 
 const MealPlan = () => {
   const theme = useTheme();
@@ -67,6 +72,26 @@ const MealPlan = () => {
     recipeName = firstRecipe.name;
     nutrition = firstRecipe.nutrition;
   }
+
+  const handleIngredients = async () => {
+    const recipeIngredients = await makeIngredients(
+      user.uid,
+      recipeName,
+      mealAllergies
+    );
+    /*     const apiIngredients = await askForIngredients(
+      recipeName,
+      "",
+      mealAllergies,
+      "",
+      "",
+      4
+    );
+    const recipeIngredients = await createRecipeIngredients(
+      user.uid,
+      apiIngredients
+    ); */
+  };
 
   return (
     <Box>
@@ -473,7 +498,11 @@ const MealPlan = () => {
                   <Grid md={9}>
                     <Box display="flex" justifyContent="space-between">
                       <Typography variant="h3">Preparation</Typography>
-                      <IconButton>
+                      <IconButton
+                        onClick={() => {
+                          handleIngredients();
+                        }}
+                      >
                         <PlayArrowIcon />
                       </IconButton>
                     </Box>
