@@ -23,6 +23,7 @@ import RefreshIcon from "@mui/icons-material/Refresh";
 import AddIcon from "@mui/icons-material/Add";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import CheckBoxOutlineBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlineBlankOutlined";
+import SearchIcon from "@mui/icons-material/Search";
 import { MealContext } from "../../core/Providers/MealProvider";
 import { SundayRef } from "../../core/utils/days/sunDay";
 import { useRecipeContext } from "../../core/Providers/RecipeProvider";
@@ -37,7 +38,10 @@ import {
   askForIngredients,
   makeIngredients,
 } from "../../components/Ingredients/MakeIngredients";
-import { createRecipeIngredients } from "../../components/Ingredients/IngredientsCrud";
+import {
+  checkForRecipe,
+  createRecipeIngredients,
+} from "../../components/Ingredients/IngredientsCrud";
 
 const MealPlan = () => {
   const theme = useTheme();
@@ -93,6 +97,16 @@ const MealPlan = () => {
     ); */
   };
 
+  // Function to clear complete cache data
+  const clearCacheData = () => {
+    caches.keys().then((names) => {
+      names.forEach((name) => {
+        caches.delete(name);
+      });
+    });
+    alert("Complete Cache Cleared");
+  };
+
   return (
     <Box>
       <Box display="flex" justifyContent="center">
@@ -120,6 +134,9 @@ const MealPlan = () => {
                     <IconButton>
                       <CalendarMonthIcon />
                     </IconButton>
+                    <button onClick={() => clearCacheData()}>
+                      Clear Cache Data
+                    </button>
                   </Box>
                 </Item>
               </Box>
@@ -498,13 +515,22 @@ const MealPlan = () => {
                   <Grid md={9}>
                     <Box display="flex" justifyContent="space-between">
                       <Typography variant="h3">Preparation</Typography>
-                      <IconButton
-                        onClick={() => {
-                          handleIngredients();
-                        }}
-                      >
-                        <PlayArrowIcon />
-                      </IconButton>
+                      <Box>
+                        <IconButton
+                          onClick={() => {
+                            handleIngredients();
+                          }}
+                        >
+                          <PlayArrowIcon />
+                        </IconButton>
+                        <IconButton
+                          onClick={() => {
+                            checkForRecipe(user.uid);
+                          }}
+                        >
+                          <SearchIcon />
+                        </IconButton>
+                      </Box>
                     </Box>
 
                     <Divider sx={{ mt: "10px" }} />

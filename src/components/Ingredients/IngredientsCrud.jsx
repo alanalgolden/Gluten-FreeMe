@@ -34,12 +34,12 @@ export const checkServerIngredients = async (uid) => {
     const doc = await getDocFromServer(docRef);
     const userRecipeIngredients = doc.data();
 
-    console.log(`Got ${userRecipeIngredients} from !CACHE!`);
+    console.log(`Got ${JSON.stringify(userRecipeIngredients)} from !SERVER!`);
 
     if (userRecipeIngredients === undefined) {
       console.log(`${uid} is undefined`);
     } else if (userRecipeIngredients !== undefined) {
-      console.log(`Got ${uid} from !cache!`);
+      console.log(`Got ${uid} from !SERVER!`);
     }
 
     return userRecipeIngredients;
@@ -72,5 +72,47 @@ export const getRecipeIngredients = async (uid) => {
     const doc = await getDocFromServer(docRef);
     const recipes = doc.data();
     return recipes;
+  }
+};
+
+export const findUserRecipeIngredients = async (uid, mealName) => {
+  /*   function cycleIngredients(recipeName) {
+    for (let i = 0; i < recipes.length; i++) {
+      if (recipes[i].name === recipeName) {
+        return { recipe: recipes[i], index: i };
+      }
+    }
+    return null;
+  } */
+  /*   const targetRecipeName = `${mealName}`;
+  const result = cycleIngredients(targetRecipeName);
+
+  if (result) {
+    console.log(
+      `Found recipe "${targetRecipeName}" at position ${result.index}`
+    );
+    console.log(result.recipe);
+  } else {
+    console.log(`No recipe found with name "${targetRecipeName}"`);
+  } */
+};
+
+export const checkForRecipe = async (uid, mealName) => {
+  const docRef = doc(db, "userRecipeIngredients", uid);
+
+  try {
+    const doc = await getDocFromServer(docRef);
+    const userRecipe = doc.data();
+
+    if (userRecipe === undefined) {
+      console.log(`returning undefined`);
+      console.log(`${uid} doesn't exist!`);
+      return false;
+    } else if (userRecipe !== undefined) {
+      console.log(userRecipe);
+      return true;
+    }
+  } catch (e) {
+    console.error(`console ERROR: ${e}`);
   }
 };

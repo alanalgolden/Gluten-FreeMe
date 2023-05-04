@@ -26,8 +26,7 @@ export const askForIngredients = async (
 
   "
   {
-    "Recipe": {
-      "name": BLANK,
+    "recipename": {
       "ingredients": [
           {
             "ingredientname": BLANK,
@@ -54,55 +53,53 @@ export async function makeIngredients(user, recipeName, mealAllergies) {
       return;
     }
 
-    if ((await checkCacheIngredients(user)) === undefined) {
-      console.log("No recipe found in CACHE");
+    /* if ((await checkCacheIngredients(user)) === undefined) {
+      console.log("No recipe found in CACHE"); */
 
-      if ((await checkServerIngredients(user)) === undefined) {
-        console.log("No ingredients found in SERVER");
-        console.log("Creating Ingredients...");
+    if ((await checkServerIngredients(user)) === undefined) {
+      console.log("No ingredients found in SERVER");
+      console.log("Creating Ingredients...");
 
-        await askForIngredients(recipeName, "", mealAllergies, "", "", 4);
-        console.log(`INGREDIENTS DATA 1 ${{ ...ingredients.data }}`);
-        console.log(`INGREDIENTS DATA 2 ${ingredients}`);
-        console.log(
-          `INGREDIENTS DATA 2 ${JSON.parse(
-            { ...ingredients }.data.choices[0].message.content
-          )}`
-        );
-        //WHY DOESN'T THIS WORK????
-        while (recipeData === undefined) {
+      await askForIngredients(recipeName, "", mealAllergies, "", "", 4);
+      console.log(`INGREDIENTS DATA 1 ${{ ...ingredients.data }}`);
+      console.log(`INGREDIENTS DATA 2 ${ingredients}`);
+      console.log(
+        `INGREDIENTS DATA 2 ${JSON.parse(
+          { ...ingredients }.data.choices[0].message.content
+        )}`
+      );
+      //WHY DOESN'T THIS WORK????
+      while (recipeData === undefined) {
+        try {
+          console.log(`Trying to parse TWO ${{ ...{ ...ingredients } }}`);
+          console.log(`Trying to parse TWO ${ingredients}`);
+          console.log(`Trying to parse TWO ${ingredients.data}`);
+          recipeData = JSON.parse(ingredients.data.choices[0].message.content);
+
+          console.log(`recipeData PARSED!`);
+        } catch (e) {
+          console.log(e);
+          console.log(`recipeData PARSE FAILED! Trying GPT again...`);
           try {
-            console.log(`Trying to parse TWO ${{ ...{ ...ingredients } }}`);
-            console.log(`Trying to parse TWO ${ingredients}`);
-            console.log(`Trying to parse TWO ${ingredients.data}`);
-            recipeData = JSON.parse(
-              ingredients.data.choices[0].message.content
-            );
-
-            console.log(`recipeData PARSED!`);
+            console.log(`Trying to parse THREE ${{ ...ingredients }}`);
+            console.log(`Trying to parse THREE ${ingredients}`);
+            console.log(`Trying to parse THREE ${ingredients.data}`);
+            askForIngredients(recipeName, "", mealAllergies, "", "", 4);
           } catch (e) {
             console.log(e);
-            console.log(`recipeData PARSE FAILED! Trying GPT again...`);
-            try {
-              console.log(`Trying to parse THREE ${{ ...ingredients }}`);
-              console.log(`Trying to parse THREE ${ingredients}`);
-              console.log(`Trying to parse THREE ${ingredients.data}`);
-              askForIngredients(recipeName, "", mealAllergies, "", "", 4);
-            } catch (e) {
-              console.log(e);
-            }
+          }
 
-            /*             recipeData = JSON.parse(
+          /*             recipeData = JSON.parse(
               ingredients.data.choices[0].message.contents
             );
             console.log(`recipeData PARSED!`); */
-          }
         }
-
-        await createRecipeIngredients(user, recipeData);
-        console.log(recipeData);
       }
+
+      await createRecipeIngredients(user, recipeData);
+      console.log(recipeData);
     }
+    /* } */
   } catch (e) {
     console.log(e);
     console.log("JSON Parse FAILED. Trying again GPT again...");

@@ -49,11 +49,7 @@ const AccountMenu = () => {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
         >
-          <Avatar
-            src={photoURL}
-            imgProps={{ referrerPolicy: "no-referrer" }}
-            sx={{ width: 30, height: 30 }}
-          />
+          <Avatar src={photoURL} imgProps={{ referrerPolicy: "no-referrer" }} />
         </IconButton>
       </Tooltip>
 
